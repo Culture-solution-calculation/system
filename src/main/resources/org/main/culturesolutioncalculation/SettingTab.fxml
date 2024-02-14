@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import java.net.URL?>
+
+<Tab xmlns="http://javafx.com/javafx"
+     xmlns:fx="http://javafx.com/fxml"
+     fx:controller="org.main.culturesolutioncalculation.SettingTabController"
+     fx:id="settingTab"
+     text="설정">
+    <content>
+        <VBox alignment="CENTER" spacing="10">
+            <stylesheets>
+                <URL value="@style/application.css" />
+            </stylesheets>
+            <HBox spacing="10">
+                <!-- 설정 다량원소 단위 -->
+                <VBox alignment="CENTER" spacing="5">
+                    <Label text="설정 다량원소 단위" />
+                    <BorderPane styleClass="borderpane" minHeight="100">
+                        <center>
+                            <VBox spacing="5">
+                                <RadioButton text="ppm(피피엠)" fx:id="group1_1" />
+                                <RadioButton text="mM(밀리몰)" fx:id="group1_2" />
+                                <RadioButton text="me(밀리당량)" fx:id="group1_3" />
+                            </VBox>
+                        </center>
+                    </BorderPane>
+                </VBox>
+                <!-- 설정 미량원소 단위 -->
+                <VBox alignment="CENTER" spacing="5">
+                    <Label text="설정 미량원소 단위" />
+                    <BorderPane styleClass="borderpane" minHeight="100">
+                        <center>
+                            <VBox spacing="5">
+                                <RadioButton text="ppm(피피엠)" fx:id="group2_1" />
+                                <RadioButton text="µM(마이크로몰)" fx:id="group2_2"  />
+                            </VBox>
+                        </center>
+                    </BorderPane>
+                </VBox>
+                <!-- 질산칼슘 비료 -->
+                <VBox alignment="CENTER" spacing="5">
+                    <Label text="질산칼슘 비료" />
+                    <BorderPane styleClass="borderpane" minHeight="100">
+                        <center>
+                            <VBox spacing="5">
+                                <RadioButton text="Ca(NO3)2·4H2O" fx:id="group3_1" />
+                                <RadioButton text="5[Ca(NO3)2·2H2O]NH4NO3" fx:id="group3_2"  />
+                            </VBox>
+                        </center>
+                    </BorderPane>
+                </VBox>
+                <!-- 철(Fe) 비료 -->
+                <VBox alignment="CENTER" spacing="5">
+                    <Label text="철(Fe) 비료" />
+                    <BorderPane styleClass="borderpane" minHeight="100">
+                        <center>
+                            <VBox spacing="5">
+                                <RadioButton text="Fe-EDTA(13%)" fx:id="group4_1" />
+                                <RadioButton text="Fe-DTPA(6%)" fx:id="group4_2"  />
+                                <RadioButton text="Fe-EDDHA(5%)" fx:id="group4_3"  />
+                            </VBox>
+                        </center>
+                    </BorderPane>
+                </VBox>
+            </HBox>
+            <HBox spacing="10">
+                <!-- 붕소(B) 비료 -->
+                <VBox alignment="CENTER" spacing="5">
+                    <Label text="붕소(B) 비료" />
+                    <BorderPane styleClass="borderpane" minHeight="100">
+                        <center>
+                            <VBox spacing="5">
+                                <RadioButton text="H3BO3" fx:id="group5_1" />
+                                <RadioButton text="Na2B4O7·7H2O" fx:id="group5_2"  />
+                            </VBox>
+                        </center>
+                    </BorderPane>
+                </VBox>
+                <!-- 망간(Mn) 비료 -->
+                <VBox alignment="CENTER" spacing="5">
+                    <Label text="망간(Mn) 비료" />
+                    <BorderPane styleClass="borderpane" minHeight="100">
+                        <center>
+                            <VBox spacing="5">
+                                <RadioButton text="MnSO4·SH2O" fx:id="group6_1" />
+                                <RadioButton text="MnSO4·H2O" fx:id="group6_2"  />
+                            </VBox>
+                        </center>
+                    </BorderPane>
+                </VBox>
+                <!-- 몰리브뎀(Mo) 비료 -->
+                <VBox alignment="CENTER" spacing="5">
+                    <Label text="몰리브뎀(Mo) 비료" />
+                    <BorderPane styleClass="borderpane" minHeight="100">
+                        <center>
+                            <VBox spacing="5">
+                                <RadioButton text="Na2MoO4·2H2O" fx:id="group7_1" />
+                                <RadioButton text="(NH4)2Mo7O24·4H2O" fx:id="group7_2"  />
+                            </VBox>
+                        </center>
+                    </BorderPane>
+                </VBox>
+            </HBox>
+            <HBox spacing="10">
+                <!-- 원수 고려 유무 -->
+                <VBox alignment="CENTER" spacing="5">
+                    <Label text="원수 고려 유무" />
+                    <BorderPane styleClass="borderpane" minHeight="100">
+                        <center>
+                            <VBox spacing="5">
+                                <RadioButton text="고려합니다." fx:id="group8_1" />
+                                <RadioButton text="고려하지 않습니다." fx:id="group8_2"  />
+                            </VBox>
+                        </center>
+                    </BorderPane>
+                </VBox>
+                <!-- 원수 입력 단위 -->
+                <VBox alignment="CENTER" spacing="5">
+                    <Label text="원수 입력 단위" />
+                    <BorderPane styleClass="borderpane" minHeight="100">
+                        <center>
+                            <VBox spacing="5">
+                                <RadioButton text="ppm(피피엠)" fx:id="group9_1" />
+                                <RadioButton text="mM(밀리몰), µM(마이크로몰)" fx:id="group9_2"  />
+                            </VBox>
+                        </center>
+                    </BorderPane>
+                </VBox>
+                <!-- 도움말 -->
+                <VBox alignment="CENTER" spacing="5">
+                    <Label text="도움말" />
+                    <BorderPane styleClass="borderpane" minHeight="100">
+                        <center>
+                            <VBox spacing="5">
+                                <Label text="◎ ppm = mM x 원자량 = me + 원자량 x 당량" />
+                                <Label text="◎ mM = ppm + 원자량 = me + 당량" />
+                                <Label text="◎ me = ppm + 원자량 x 당량 = mM x 당량" />
+                            </VBox>
+                        </center>
+                    </BorderPane>
+                </VBox>
+            </HBox>
+
+            <!-- 저장 버튼 -->
+            <Button text="저장" onAction="#saveSettings" />
+        </VBox>
+    </content>
+</Tab>

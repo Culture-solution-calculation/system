@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+
+<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="org.main.culturesolutioncalculation.MainController">
+    <stylesheets>
+        <URL value="@style/application.css" />
+    </stylesheets>
+
+    <fx:include source="ToolbarContent.fxml"/>
+    <TabPane VBox.vgrow="ALWAYS" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+            <fx:include source="SettingTab.fxml" />
+            <fx:include source="MacroTab.fxml" />
+            <fx:include source="MicroTab.fxml" />
+            <fx:include source="PrintTab.fxml" />
+            <fx:include source="TypeTab.fxml" />
+        </tabs>
+    </TabPane>
+</VBox>

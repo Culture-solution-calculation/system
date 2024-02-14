@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import java.net.URL?>
+<Tab xmlns="http://javafx.com/javafx"
+     xmlns:fx="http://javafx.com/fxml"
+     fx:controller="org.main.culturesolutioncalculation.MacroTabController"
+     text="다량원소">
+    <content>
+        <VBox alignment="CENTER" spacing="10">
+            <stylesheets>
+                <URL value="@style/application.css" />
+            </stylesheets>
+            <TableView fx:id="tableView" minHeight="400"/>
+            <Button text="저장" onAction="#saveData" />
+        </VBox>
+    </content>
+</Tab>

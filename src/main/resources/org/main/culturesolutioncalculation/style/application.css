@@ -1,0 +1,112 @@
+/* application.css */
+
+/* 전체 Body에 대한 스타일 */
+body {
+    -fx-background-color: #f4f4f4;
+    -fx-font-size: 14px;
+}
+
+/* 전체 Label에 대한 스타일 */
+.label {
+    -fx-font-size: 14px;
+}
+
+/* 전체 Button에 대한 스타일 */
+.button {
+    -fx-background-color: #007bff;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-cursor: hand;
+    -fx-background-radius: 5px;
+}
+
+/* 전체 TextField에 대한 스타일 */
+.text-field {
+    -fx-background-radius: 5px;
+}
+
+/* 전체 TextArea에 대한 스타일 */
+.text-area {
+    -fx-font-size: 14px;
+    -fx-pref-width: 300px;
+    -fx-pref-height: 200px;
+    -fx-background-radius: 5px;
+}
+
+/* 전체 ListView에 대한 스타일 */
+.list-view {
+    -fx-font-size: 14px;
+    -fx-background-color: #ffffff;
+    -fx-pref-width: 200px;
+    -fx-pref-height: 200px;
+    -fx-background-radius: 5px;
+}
+
+/* 전체 TableView에 대한 스타일 */
+.table-view {
+    -fx-font-size: 14px;
+    -fx-background-color: #ffffff;
+    -fx-pref-width: 500px;
+    -fx-pref-height: 300px;
+    -fx-background-radius: 5px;
+}
+
+/* 전체 TabPane에 대한 스타일 */
+.tab-pane {
+    -fx-tab-min-width: 130px;
+    -fx-tab-min-height: 20px;
+}
+
+/* 전체 Tab에 대한 스타일 */
+.tab {
+    -fx-background-color: #f4f4f4;
+    -fx-padding: 3px;
+    -fx-font-size: 14px;
+}
+
+/* 전체 ToolBar에 대한 스타일 */
+.tool-bar {
+    -fx-background-color: transparent;
+}
+
+/* 툴바 버튼 스타일 */
+.tool-bar .button {
+    -fx-background-color: #d3d3d3;
+    -fx-font-size: 14px;
+    -fx-text-fill: #222222;
+    -fx-pref-height: 20px;
+    -fx-background-radius: 0px;
+}
+
+.borderpane {
+    -fx-border-color: #d3d3d3;
+    -fx-border-width: 1px;
+    -fx-padding: 10px;
+    -fx-alignment: center;
+}
+
+/* 전체 RadioButton에 대한 스타일 */
+.radio-button {
+    -fx-font-size: 14px;
+}
+
+/* 전체 ComboBox에 대한 스타일 */
+.combo-box {
+    -fx-font-size: 14px;
+    -fx-pref-width: 200px;
+}
+
+.label-bold {
+    -fx-font-weight: bold;
+    -fx-font-size: 15px;
+}
+
+.separator {
+    -fx-background-color: #d3d3d3;
+}
+
+.vbox-container {
+    -fx-flex: 1;
+    -fx-alignment: center-left;
+    -fx-spacing: 40;
+}

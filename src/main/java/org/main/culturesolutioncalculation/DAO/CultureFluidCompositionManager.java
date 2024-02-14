@@ -1,12 +1,12 @@
-package DAO;
+package org.main.culturesolutioncalculation.DAO;
 
-import DTO.CultureFluidCompositionDTO;
+import org.main.culturesolutioncalculation.DTO.CultureFluidCompositionDTO;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/* 배양액 테이블 DAO*/
+/* 배양액 테이블 org.main.culturesolutioncalculation.DAO*/
 public class CultureFluidCompositionManager {
     private final Connection connection;
 

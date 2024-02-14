@@ -1,4 +1,4 @@
-package DTO;
+package org.main.culturesolutioncalculation.DTO;
 
 public class CultureMediumDTO {
     private final Long cultureMediumSeq;

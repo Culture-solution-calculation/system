@@ -1,7 +1,7 @@
-package DAO;
+package org.main.culturesolutioncalculation.DAO;
 
-import DTO.AtomsConcentrationDTO;
-import DTO.ConfigurationConcentrateDTO;
+import org.main.culturesolutioncalculation.DTO.AtomsConcentrationDTO;
+import org.main.culturesolutioncalculation.DTO.ConfigurationConcentrateDTO;
 
 import java.sql.*;
 import java.util.ArrayList;

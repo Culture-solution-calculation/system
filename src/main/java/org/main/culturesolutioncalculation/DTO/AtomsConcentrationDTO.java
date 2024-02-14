@@ -1,4 +1,4 @@
-package DTO;
+package org.main.culturesolutioncalculation.DTO;
 
 public class AtomsConcentrationDTO {
     private final int set_atom_seq;

@@ -1,19 +1,17 @@
-package DAO;
+package org.main.culturesolutioncalculation.DAO;
 
-import DTO.CultivatedCropDTO;
+import org.main.culturesolutioncalculation.DTO.CultureMediumDTO;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/* 재배작물 DAO */
-public class CultivatedCropManager {
+/*  배양액 org.main.culturesolutioncalculation.DAO */
+public class CultureMediumManager {
     private final Connection connection;
-
-    public CultivatedCropManager() throws SQLException {
+    public CultureMediumManager() throws SQLException {
         this.connection = getConnection();
     }
-
     private static Connection getConnection() throws SQLException {
         String url = "jdbc:mysql://localhost:3306/culture_fluid_composition";
         String userName = "root";
@@ -22,8 +20,9 @@ public class CultivatedCropManager {
         return DriverManager.getConnection(url, userName, password);
     }
 
-    public void insertCultivated(String name) {
-        String sql = "INSERT INTO cultivated_crop (crop_name) VALUES (?)";
+
+    public void insertCultureMedium(String name) {
+        String sql = "INSERT INTO culture_medium (culture_medium_name) VALUES (?)";
 
         try (PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, name);
@@ -33,28 +32,31 @@ public class CultivatedCropManager {
         }
     }
 
-    public List<CultivatedCropDTO> getCultivatedCropList() {
-        String sql = "SELECT * FROM cultivated_crop";
-        List<CultivatedCropDTO> cultivatedCropDTOList = new ArrayList<CultivatedCropDTO>();
+    public List<CultureMediumDTO> getCultureMediumList() {
+        String sql =  "SELECT * FROM culture_medium";
+        List<CultureMediumDTO> cultureMediumDTOList = new ArrayList<>();
         try (Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(sql)) {
 
             while (resultSet.next()) {
-                Long cropSeq = resultSet.getLong("crop_seq");
-                String cropName = resultSet.getString("crop_name");
 
-                CultivatedCropDTO cultivatedCropDTO = new CultivatedCropDTO(cropSeq, cropName);
+                Long cultureMediumSeq = resultSet.getLong("culture_medium_seq");
+                String cultureMediumName= resultSet.getString("culture_medium_name");
 
-                cultivatedCropDTOList.add(cultivatedCropDTO);
+                CultureMediumDTO configurationDTO = new CultureMediumDTO(
+                        cultureMediumSeq,cultureMediumName
+                );
+
+                cultureMediumDTOList.add(configurationDTO);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return cultivatedCropDTOList;
+        return cultureMediumDTOList;
     }
 
-    public void deleteCultivated(int seq) {
-        String sql = "DELETE FROM cultivated_crop WHERE crop_seq = ?";
+    public void deleteCultureMedium(int seq) {
+        String sql = "DELETE FROM culture_medium WHERE culture_medium_seq = ?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, seq);
             statement.executeUpdate();

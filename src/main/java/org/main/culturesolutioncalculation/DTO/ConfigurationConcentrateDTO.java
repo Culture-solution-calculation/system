@@ -1,4 +1,4 @@
-package DTO;
+package org.main.culturesolutioncalculation.DTO;
 
 public class ConfigurationConcentrateDTO {
     private final int setAtomSeq;

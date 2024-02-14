@@ -1,4 +1,4 @@
-package DTO;
+package org.main.culturesolutioncalculation.DTO;
 
 public class ConfigurationDTO {
     private static final int conSeq = 0;

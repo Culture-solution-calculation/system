@@ -1,10 +1,10 @@
-package DAO;
+package org.main.culturesolutioncalculation.DAO;
 
-import DTO.ConfigurationDTO;
+import org.main.culturesolutioncalculation.DTO.ConfigurationDTO;
 
 import java.sql.*;
 
-/* 설정 테이블 DAO*/
+/* 설정 테이블 org.main.culturesolutioncalculation.DAO*/
 public class ConfigurationManager {
     private final Connection connection;
     public ConfigurationManager() throws SQLException {

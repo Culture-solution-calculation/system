@@ -1,77 +1,104 @@
 package org.main.culturesolutioncalculation;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-public class TypeTabController extends TabController{
-
-    @FXML
-    private CustomTableView<String[]> tableView;
-
+public class TypeTabController {
     @FXML
     private ComboBox<String> comboBox;
 
-    @Override
-    protected String[] getColumnTitles() {
-        return new String[]{"비료염", "딸기(파)", "딸기(순)", "꽃상추(순)", "가지(암)", "가지(암-순)"};
-    }
+    @FXML
+    private TableView<String[]> tableView;
 
-    @Override
-    protected String[] getRowTitles() {
-        return new String[]{"EC(dS·m-1)", "NO3(mmol/L)", "NH4", "H2PO4", "K", "Ca", "Mg", "SO4", "Fe(µmol/L)", "Cu",
-                "B", "Mn", "Zn", "Mo"};
-    }
+    @FXML
+    private ListView<String> listView;
 
-    @Override
+
     public void initialize() {
-        super.initialize();
+        listView.getItems().addAll("네덜란드 배양액", "야마자키 배양액", "대한민국 배양액", "기타", "수동");
 
-        for (int i = 0; i < rowTitles.length; i++) {
-            String[] row = new String[columnTitles.length];
-            row[0] = rowTitles[i];
-            tableView.getItems().add(row);
-        }
+        // 네덜란드 배양액을 기본 선택으로 설정
+        listView.getSelectionModel().select("네덜란드 배양액");
+        updateComboBox("네덜란드 배양액");
+        updateTableView("네덜란드 배양액");
 
-        // ComboBox 이벤트 리스너
-        comboBox.setOnAction(event -> {
-            String selectedCrop = comboBox.getValue();
+        listView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            updateComboBox(newValue);
+            updateTableView(newValue);
 
-            if (selectedCrop != null && !selectedCrop.isEmpty()) {
-                addColumnForCrop(selectedCrop);
-            }
         });
 
-    }
-    @FXML
-    protected void saveData() {
-        // 데이터 저장
+
     }
 
-    private void addColumnForCrop(String crop) {
-        TableColumn<String[], String> column = new TableColumn<>(crop);
-        tableView.getColumns().add(column);
+    private void updateComboBox(String newValue) {
+        ObservableList<String> cropList = TypeData.getCropList(newValue);
+        comboBox.setItems(cropList);
+
     }
 
-    @FXML
-    private void deleteColumnForCrop() {
-        TableColumn<?, ?> selectedColumn = tableView.getSelectedColumn();
-        if (selectedColumn != null) {
-            if (tableView.getColumns().indexOf(selectedColumn) != 0) {
-                tableView.getColumns().remove(selectedColumn);
-            } else {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("알림");
-                alert.setHeaderText(null);
-                alert.setContentText("첫 번째 열은 삭제할 수 없습니다.");
-                alert.showAndWait();
+    private void updateTableView(String newValue) {
+        ObservableList<String[]> compositionData = TypeData.getCompositionData(newValue);
+
+        // 테이블 뷰에 컬럼 추가
+        tableView.getColumns().clear();
+        if (!compositionData.isEmpty()) {
+            String[] headers = compositionData.remove(0); // 첫 번째 배열은 헤더
+            for (int i = 0; i < headers.length; i++) {
+                final int index = i;
+                TableColumn<String[], String> column = new TableColumn<>(headers[i]);
+                column.setCellValueFactory(data -> new SimpleStringProperty(data.getValue()[index]));
+                tableView.getColumns().add(column);
             }
-        } else {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("알림");
-            alert.setHeaderText(null);
-            alert.setContentText("삭제할 컬럼을 선택하세요.");
-            alert.showAndWait();
         }
+
+        tableView.setItems(compositionData);
     }
+
 
 }
+
+
+
+//    @FXML
+//    private TableView<String[]> tableView;
+//
+//    public void initialize() {
+//        String[] columnTitles = {"비료염", "딸기(파)", "딸기(순)", "꽃상추(순)", "가지(암)", "가지(암-순)"};
+//        String[] rowTitles =  {"EC(dS·m-1)", "NO3(mmol/L)", "NH4", "H2PO4", "K", "Ca", "Mg", "SO4", "Fe(µmol/L)", "Cu",
+//                "B", "Mn", "Zn", "Mo"};
+//
+//    for (int i = 0; i < columnTitles.length; i++) {
+//        final int columnIndex = i;
+//        TableColumn<String[], String> column = new TableColumn<>(columnTitles[i]);
+//
+//        // 첫 번째 열 제외하고 편집 가능하도록 함
+//        if (i == 0) {
+//            column.setCellValueFactory(data -> {
+//                String[] row = data.getValue();
+//                return new SimpleStringProperty(row[0]);
+//            });
+//        } else {
+//            column.setCellValueFactory(data -> {
+//                String[] row = data.getValue();
+//                return new SimpleStringProperty(row[columnIndex]);
+//            });
+//            column.setCellFactory(TextFieldTableCell.forTableColumn(new DefaultStringConverter()));
+//            column.setOnEditCommit(event -> {
+//                String[] row = event.getTableView().getItems().get(event.getTablePosition().getRow());
+//                row[columnIndex] = event.getNewValue();
+//            });
+//        }
+//        tableView.getColumns().add(column);
+//    }
+//
+//        for (int i = 0; i < 16; i++) {
+//        String[] row = new String[11];
+//        row[0] = rowTitles[i];
+//        tableView.getItems().add(row);
+//    }
+//
+//}
+//

@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.collections.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<?import org.main.culturesolutioncalculation.CustomTableView?>
 <?import java.net.URL?>
 
 <Tab xmlns="http://javafx.com/javafx"
@@ -24,30 +21,12 @@
                     <!-- 배양액 선택 ListView -->
                     <VBox>
                         <Label text="* 배양액 선택" styleClass="label-bold" />
-                        <ListView prefWidth="150" prefHeight="150.0">
-                            <items>
-                                <FXCollections fx:factory="observableArrayList">
-                                    <String fx:value="네덜란드 배양액" />
-                                    <String fx:value="야마자키 배양액" />
-                                </FXCollections>
-                            </items>
-                        </ListView>
+                        <ListView fx:id="listView" prefWidth="150" prefHeight="150.0" />
                     </VBox>
-
                     <!-- 재배 작물 ComboBox -->
                     <VBox>
                         <Label text="* 재배 작물 선택" styleClass="label-bold" />
-                        <ComboBox fx:id="comboBox" prefWidth="150" promptText="** 재배작물 **">
-                            <items>
-                                <FXCollections fx:factory="observableArrayList">
-                                    <String fx:value="딸기(파)" />
-                                    <String fx:value="딸기(순)" />
-                                    <String fx:value="꽃상추(순)" />
-                                    <String fx:value="가지(암)" />
-                                    <String fx:value="가지(암-순)" />
-                                </FXCollections>
-                            </items>
-                        </ComboBox>
+                        <ComboBox fx:id="comboBox" prefWidth="150" promptText="** 재배작물 **" />
                     </VBox>
                 </VBox>
             </AnchorPane>
@@ -61,11 +40,9 @@
                             <Label text="* 순 : 순수수경  암 : 양면재배  사 : 사경재배   암-순 : 암면재배-순환식" />
                             <Label text="* 파 : 파트재배  페 : 페놀수지  우 : 우레탄수지   경 : 경석" />
                         </VBox>
-                        <Button text="삭제" onAction="#deleteColumnForCrop" />
                     </HBox>
 
-                    <CustomTableView fx:id="tableView" minHeight="400"/>
-                    <Button text="저장" onAction="#saveData"/>
+                    <TableView fx:id="tableView" minHeight="400"/>
                 </VBox>
             </AnchorPane>
         </SplitPane>

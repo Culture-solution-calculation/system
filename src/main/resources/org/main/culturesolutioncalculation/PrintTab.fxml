@@ -17,6 +17,22 @@
             <!-- 첫 번째 팬 -->
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                 <VBox styleClass="vbox-container">
+                    <!-- 고객 정보 출력(수정 필요) -->
+                    <VBox spacing="10">
+                        <HBox alignment="CENTER_LEFT">
+                            <Label text="고객 이름: 김*희" />
+<!--                        <Label fx:id="customerNameLabel" />-->
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT">
+                            <Label text="처리 일자: 2021-10-31" />
+<!--                        <Label fx:id="processingDateLabel" />-->
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT">
+                            <Label text="시료 번호: 21-0022" />
+<!--                        <Label fx:id="sampleNumberLabel" />-->
+                        </HBox>
+                    </VBox>
+
                     <VBox spacing="10">
                         <HBox alignment="CENTER_LEFT">
                             <Label text="재배작물: " />

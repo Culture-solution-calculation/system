@@ -3,7 +3,10 @@ package org.main.culturesolutioncalculation;
 import javafx.fxml.FXML;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
+import org.main.culturesolutioncalculation.DAO.ConfigurationManager;
+import org.main.culturesolutioncalculation.DTO.ConfigurationDTO;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -72,37 +75,63 @@ public class SettingTabController {
     }
 
     @FXML
-    private void saveSettings() {
-        Map<String, Integer> selectedValues = new HashMap<>();
-        saveGroupSelection(group1, "설정_다량원소_단위", selectedValues);
-        saveGroupSelection(group2, "설정_미량원소_단위", selectedValues);
-        saveGroupSelection(group3, "질산칼숨_비료", selectedValues);
-        saveGroupSelection(group4, "철_비료", selectedValues);
-        saveGroupSelection(group5, "붕소_비료", selectedValues);
-        saveGroupSelection(group6, "망간_비료", selectedValues);
-        saveGroupSelection(group7, "몰리브뎀_비료", selectedValues);
-        saveGroupSelection(group8, "원수_고려_유무", selectedValues);
-        saveGroupSelection(group9, "원수_입력_단위", selectedValues);
+    private void saveSettings() throws SQLException {
+        Map<String, Integer> selectedValues = getSelectedValues();
 
-        // 데이터베이스에 저장
-//        DatabaseManager.insertSettings(selectedValues);
+        ConfigurationManager configManager = new ConfigurationManager();
+        ConfigurationDTO configurationDTO = mapToDTO(selectedValues);
+
+        configManager.setConfiguration(configurationDTO);
     }
 
-    // 계산하기 위해 값 변환 필요
-    // ex) 고려 여부 yn
-    private void saveGroupSelection(ToggleGroup group, String groupName, Map<String, Integer> selectedValues) {
+    private Map<String, Integer> getSelectedValues() {
+        Map<String, Integer> selectedValues = new HashMap<>();
+
+        // 각 라디오 버튼에서 선택된 값을 가져와서 맵에 추가
+        selectedValues.put("multiUnitSeq", getSelectedValue(group1));
+        selectedValues.put("traceUnitSeq", getSelectedValue(group2));
+        selectedValues.put("cnFertilizerSeq", getSelectedValue(group3));
+        selectedValues.put("feFertilizerSeq", getSelectedValue(group4));
+        selectedValues.put("bFertilizerSeq", getSelectedValue(group5));
+        selectedValues.put("mnFertilizerSeq", getSelectedValue(group6));
+        selectedValues.put("moFertilizerSeq", getSelectedValue(group7));
+        selectedValues.put("inputUnitSeq", getSelectedValue(group8));
+
+        String elementalYnText = getSelectedStringValue(group9);
+        selectedValues.put("elementalYn", "고려합니다".equals(elementalYnText) ? 1 : 0);
+
+        return selectedValues;
+    }
+
+    private String getSelectedStringValue(ToggleGroup group) {
+        RadioButton selectedRadioButton = (RadioButton) group.getSelectedToggle();
+        return selectedRadioButton != null ? selectedRadioButton.getText() : null;
+    }
+
+    private Integer getSelectedValue(ToggleGroup group) {
         RadioButton selectedRadioButton = (RadioButton) group.getSelectedToggle();
         if (selectedRadioButton != null) {
             String selectedId = selectedRadioButton.getId();
             String[] parts = selectedId.split("_");
-
-            Integer selectedValue = Integer.parseInt(parts[1]);
-            selectedValues.put(groupName, selectedValue);
-            System.out.println(groupName + " 선택된 값: " + selectedValue);
+            return Integer.parseInt(parts[1]);
         } else {
-            // 선택된 값이 없을 경우 처리
-            selectedValues.put(groupName, null);
-            System.out.println(groupName + "에서 아무것도 선택되지 않았습니다.");
+            return null; // 선택된 값이 없을 경우
         }
     }
+
+    private ConfigurationDTO mapToDTO(Map<String, Integer> selectedValues) {
+        // elementalYn 값 String으로 변경
+        return new ConfigurationDTO(
+                selectedValues.get("multiUnitSeq"),
+                selectedValues.get("traceUnitSeq"),
+                selectedValues.get("cnFertilizerSeq"),
+                selectedValues.get("feFertilizerSeq"),
+                selectedValues.get("bFertilizerSeq"),
+                selectedValues.get("mnFertilizerSeq"),
+                selectedValues.get("moFertilizerSeq"),
+                selectedValues.get("inputUnitSeq"),
+                selectedValues.get("elementalYn").toString()
+        );
+    }
+
 }

@@ -20,7 +20,7 @@
                     <TextField fx:id="username" promptText="입력" />
 
                     <Label text="처리 일자: " />
-                    <DatePicker fx:id="date"/>
+                    <DatePicker fx:id="date" />
 
                     <Label text="시료 번호: " />
                     <TextField fx:id="sampleNumber" promptText="입력" />

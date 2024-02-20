@@ -5,6 +5,8 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
+import java.time.LocalDate;
+
 public class UserInfoTabController {
 
     @FXML
@@ -29,6 +31,8 @@ public class UserInfoTabController {
 
 
     public void initialize() {
+        date.setValue(LocalDate.now());
+
         listView.getItems().addAll("네덜란드 배양액", "야마자키 배양액", "대한민국 배양액");
 
         // 네덜란드 배양액을 기본 선택으로 설정

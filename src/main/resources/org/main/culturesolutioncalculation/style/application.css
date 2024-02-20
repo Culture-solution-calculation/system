@@ -78,6 +78,12 @@ body {
     -fx-background-radius: 0px;
 }
 
+.outer-borderpane {
+    -fx-border-color: #dedede;
+    -fx-border-width: 2px;
+    -fx-padding: 10px;
+}
+
 .borderpane {
     -fx-border-color: #d3d3d3;
     -fx-border-width: 1px;

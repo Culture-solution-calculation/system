@@ -17,13 +17,13 @@
             <VBox>
                 <HBox spacing="10" alignment="CENTER_LEFT">
                     <Label text="고객 이름: " />
-                    <TextField promptText="입력" />
+                    <TextField fx:id="username" promptText="입력" />
 
                     <Label text="처리 일자: " />
-                    <DatePicker />
+                    <DatePicker fx:id="date"/>
 
                     <Label text="시료 번호: " />
-                    <TextField promptText="입력" />
+                    <TextField fx:id="sampleNumber" promptText="입력" />
                 </HBox>
             </VBox>
 
@@ -62,6 +62,8 @@
                     </VBox>
                 </AnchorPane>
             </SplitPane>
+
+            <Button text="저장" onAction="#saveUserInfo" />
         </VBox>
     </content>
 </Tab>

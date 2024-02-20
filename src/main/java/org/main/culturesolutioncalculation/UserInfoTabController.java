@@ -3,12 +3,10 @@ package org.main.culturesolutioncalculation;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 
 public class UserInfoTabController {
+
     @FXML
     private ComboBox<String> comboBox;
 
@@ -17,6 +15,17 @@ public class UserInfoTabController {
 
     @FXML
     private ListView<String> listView;
+
+    @FXML
+    private TextField username;
+
+    @FXML
+    private DatePicker date;
+
+    @FXML
+    private TextField sampleNumber;
+
+    private UserInfo userInfo = MainController.getUserInfo();
 
 
     public void initialize() {
@@ -32,8 +41,20 @@ public class UserInfoTabController {
             updateTableView(newValue);
 
         });
+    }
 
-
+    @FXML
+    private void saveUserInfo() {
+        if(userInfo != null) {
+            userInfo.setCustomerName(username.getText());
+            userInfo.setProcessingDate(date.getValue());
+            userInfo.setSampleNumber(sampleNumber.getText());
+            userInfo.setSelectedCulture(listView.getSelectionModel().getSelectedItem());
+            userInfo.setSelectedCrop(comboBox.getValue());
+//            System.out.println(userInfo.getSelectedCrop());
+        } else {
+            System.err.println("UserInfo 객체가 초기화되지 않았습니다.");
+        }
     }
 
     private void updateComboBox(String newValue) {

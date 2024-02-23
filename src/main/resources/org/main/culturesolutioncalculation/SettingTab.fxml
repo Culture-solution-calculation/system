@@ -179,9 +179,6 @@
                     </BorderPane>
                 </VBox>
             </HBox>
-
-            <!-- 저장 버튼 -->
-            <Button text="저장" onAction="#saveSettings" />
         </VBox>
     </content>
 </Tab>

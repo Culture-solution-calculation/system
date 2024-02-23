@@ -29,10 +29,4 @@ public class MicroTabController extends TabController {
             tableView.getItems().add(row);
         }
     }
-
-    @FXML
-    protected void saveData() {
-        // 데이터 저장
-        // DatabaseManager.insertMicroSum(data);
-    }
 }

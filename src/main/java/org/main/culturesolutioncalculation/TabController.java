@@ -7,7 +7,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.util.converter.DefaultStringConverter;
 
-// enter 키 없이 다른 셀 눌러서 반영 가능하도록
+
 public abstract class TabController {
     @FXML
     protected TableView<String[]> tableView;
@@ -47,18 +47,6 @@ public abstract class TabController {
             tableView.getColumns().add(column);
         }
 
-        tableView.setEditable(true);
         tableView.setSortPolicy(null);
-
-        tableView.setOnMouseClicked(event -> {
-            if (event.getClickCount() == 1) {
-                tableView.edit(tableView.getSelectionModel().getSelectedIndex(), tableView.getFocusModel().getFocusedCell().getTableColumn());
-            }
-        });
     }
-
-    // 합계 버튼, 계산 따로 빼기
-    // (열 이름, 값) 저장
-    @FXML
-    protected abstract void saveData();
 }

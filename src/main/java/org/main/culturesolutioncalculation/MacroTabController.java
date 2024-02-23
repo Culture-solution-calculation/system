@@ -31,11 +31,5 @@ public class MacroTabController extends TabController {
             tableView.getItems().add(row);
         }
     }
-
-    @FXML
-    protected void saveData() {
-        // 데이터 저장
-        // DatabaseManager.insertMacroSum(data);
-    }
 }
 

@@ -12,8 +12,7 @@
             <stylesheets>
                 <URL value="@style/application.css" />
             </stylesheets>
-            <TableView fx:id="tableView" minHeight="400" />
-            <Button text="저장" onAction="#saveData" />
+            <TableView fx:id="tableView" minHeight="500" />
         </VBox>
     </content>
 </Tab>

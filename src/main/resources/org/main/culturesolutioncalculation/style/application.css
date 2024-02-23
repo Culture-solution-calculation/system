@@ -22,7 +22,7 @@ body {
 
 /* 전체 TextField에 대한 스타일 */
 .text-field {
-    -fx-background-radius: 5px;
+    -fx-background-radius: 3px;
 }
 
 /* 전체 TextArea에 대한 스타일 */

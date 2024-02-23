@@ -1,8 +1,11 @@
 package org.main.culturesolutioncalculation;
 
 public class SettingInfo {
+    // 그룹 이름
     private String group;
+    // 라디오 버튼 text
     private String radioButton;
+    // 모달창 입력 값
     private Integer value;
 
     public SettingInfo(String group, String radioButton, Integer value) {

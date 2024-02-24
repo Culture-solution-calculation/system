@@ -44,6 +44,9 @@ public class SettingTabController {
     // 각 그룹의 이름을 저장
     private Map<RadioButton, String> groupNamesMap = new HashMap<>();
 
+    // 각 그룹의 설정 정보를 저장
+    private Map<String, SettingInfo> groupInfoMap = new HashMap<>();
+
     @FXML
     private void initialize() {
         group1_1.setToggleGroup(group1);
@@ -110,13 +113,27 @@ public class SettingTabController {
         dialog.getDialogPane().lookupButton(ButtonType.OK).addEventFilter(ActionEvent.ACTION, e -> {
             String radioButtonText = radioButton.getText();
             Integer input = Integer.valueOf(textField.getText());
-            SettingInfo settingInfo = new SettingInfo(groupName, radioButtonText, input);
 
-//            System.out.println("Group: " + settingInfo.getGroup());
-//            System.out.println("RadioButton: " + settingInfo.getRadioButton());
-//            System.out.println("Value: " + settingInfo.getValue());
+            // 이전에 저장된 SettingInfo가 있다면 제거
+            groupInfoMap.remove(groupName);
+
+            SettingInfo settingInfo = new SettingInfo(groupName, radioButtonText, input);
+            groupInfoMap.put(groupName, settingInfo);
+
+            printGroupInfoMap();
         });
 
         dialog.showAndWait();
+    }
+
+    private void printGroupInfoMap() {
+        for (Map.Entry<String, SettingInfo> entry : groupInfoMap.entrySet()) {
+            String groupName = entry.getKey();
+            SettingInfo settingInfo = entry.getValue();
+            System.out.println("Group: " + groupName);
+            System.out.println("RadioButton: " + settingInfo.getRadioButton());
+            System.out.println("Value: " + settingInfo.getValue());
+            System.out.println("----");
+        }
     }
 }

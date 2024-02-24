@@ -98,6 +98,7 @@ public class SettingTabController {
         }
     }
 
+    @FXML
     private void showInputDialog(ActionEvent event) {
         RadioButton radioButton = (RadioButton) event.getSource();
         String groupName = groupNamesMap.get(radioButton);
@@ -117,14 +118,53 @@ public class SettingTabController {
             // 이전에 저장된 SettingInfo가 있다면 제거
             groupInfoMap.remove(groupName);
 
-            SettingInfo settingInfo = new SettingInfo(groupName, radioButtonText, input);
+            SettingInfo settingInfo = new SettingInfo();
+            settingInfo.setGroup(groupName);
+            settingInfo.setRadioButton(radioButtonText);
+            settingInfo.setValue(input);
+
             groupInfoMap.put(groupName, settingInfo);
 
             printGroupInfoMap();
         });
 
         dialog.showAndWait();
+
+        // 여기서 groupInfoMap을 업데이트
     }
+
+
+//    private void showInputDialog(ActionEvent event) {
+//        RadioButton radioButton = (RadioButton) event.getSource();
+//        String groupName = groupNamesMap.get(radioButton);
+//
+//        // 모달 다이얼로그 생성
+//        Alert dialog = new Alert(Alert.AlertType.CONFIRMATION);
+//        dialog.initModality(Modality.WINDOW_MODAL);
+//        dialog.setTitle(groupName);
+//
+//        TextField textField = new TextField();
+//        dialog.getDialogPane().setContent(textField);
+//
+//        dialog.getDialogPane().lookupButton(ButtonType.OK).addEventFilter(ActionEvent.ACTION, e -> {
+//            String radioButtonText = radioButton.getText();
+//            Integer input = Integer.valueOf(textField.getText());
+//
+//            // 이전에 저장된 SettingInfo가 있다면 제거
+//            groupInfoMap.remove(groupName);
+//
+//            SettingInfo settingInfo = new SettingInfo(groupName, radioButtonText, input);
+//            groupInfoMap.put(groupName, settingInfo);
+//
+//            printGroupInfoMap();
+//        });
+//
+//        dialog.showAndWait();
+//    }
+
+//    public Map<String, SettingInfo> getGroupInfoMap() {
+//        return groupInfoMap;
+//    }
 
     private void printGroupInfoMap() {
         for (Map.Entry<String, SettingInfo> entry : groupInfoMap.entrySet()) {
@@ -133,7 +173,12 @@ public class SettingTabController {
             System.out.println("Group: " + groupName);
             System.out.println("RadioButton: " + settingInfo.getRadioButton());
             System.out.println("Value: " + settingInfo.getValue());
-            System.out.println("----");
         }
+        System.out.println("----");
+    }
+
+    @FXML
+    public void saveSettings() {
+        SettingInfo.setGroupInfoMap(groupInfoMap);
     }
 }

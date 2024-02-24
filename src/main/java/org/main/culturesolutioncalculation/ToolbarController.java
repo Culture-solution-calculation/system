@@ -2,6 +2,7 @@ package org.main.culturesolutioncalculation;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.*;
@@ -11,15 +12,18 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public class ToolbarController {
     @FXML
     private Button exitButton;
-
     @FXML
     private Button initButton;
+
+    private SettingInfo settingInfo = new SettingInfo();
 
     @FXML
     public void onEditButtonClick(ActionEvent event) {
@@ -114,6 +118,15 @@ public class ToolbarController {
         previewStage.setTitle("프린트 미리보기");
         previewStage.show();
 
-
     }
+
+    @FXML
+    public void onCalcButtonClick(ActionEvent actionEvent) {
+        // 설정 정보 가져오기
+        Map<String, SettingInfo> groupInfoMap = settingInfo.getGroupInfoMap();
+        // 계산식 설정
+        MacroTabController macroTabController = new MacroTabController();
+        macroTabController.updateTable(groupInfoMap);
+    }
+
 }

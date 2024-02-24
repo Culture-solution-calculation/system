@@ -1,5 +1,8 @@
 package org.main.culturesolutioncalculation;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class SettingInfo {
     // 그룹 이름
     private String group;
@@ -7,11 +10,10 @@ public class SettingInfo {
     private String radioButton;
     // 모달창 입력 값
     private Integer value;
+    // SettingInfo 맵
+    private static Map<String, SettingInfo> groupInfoMap = new HashMap<>();
 
-    public SettingInfo(String group, String radioButton, Integer value) {
-        this.group = group;
-        this.radioButton = radioButton;
-        this.value = value;
+    public SettingInfo() {
     }
 
     public String getGroup() {
@@ -36,5 +38,22 @@ public class SettingInfo {
 
     public void setValue(Integer value) {
         this.value = value;
+    }
+
+    public Map<String, SettingInfo> getGroupInfoMap() {
+        return groupInfoMap;
+    }
+
+    public static void setGroupInfoMap(Map<String, SettingInfo> map) {
+        groupInfoMap = map;
+    }
+
+    @Override
+    public String toString() {
+        return "SettingInfo {" +
+                "Group=" + group +
+                ", RadioButton=" + radioButton+
+                ", value=" + value +
+                '}';
     }
 }

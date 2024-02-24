@@ -10,7 +10,7 @@
         <URL value="@style/application.css" />
     </stylesheets>
 
-    <fx:include source="ToolbarContent.fxml"/>
+    <fx:include source="Toolbar.fxml" />
     <TabPane VBox.vgrow="ALWAYS" tabClosingPolicy="UNAVAILABLE">
         <tabs>
             <fx:include source="UserInfoTab.fxml" />

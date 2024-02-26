@@ -10,84 +10,47 @@
      fx:controller="org.main.culturesolutioncalculation.PrintTabController"
      text="프린트">
     <content>
-        <SplitPane dividerPositions="0.33, 0.66">
+        <SplitPane dividerPositions="0.25">
             <stylesheets>
                 <URL value="@style/application.css" />
             </stylesheets>
             <!-- 첫 번째 팬 -->
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                 <VBox styleClass="vbox-container">
-                    <!-- 고객 정보 출력(수정 필요) -->
+                    <Button text="가져오기" onAction="#load" />
+                    <!-- UserInfo 출력 -->
                     <VBox spacing="10">
                         <HBox alignment="CENTER_LEFT">
-                            <Label text="고객 이름: 김*희" />
-<!--                        <Label fx:id="customerNameLabel" />-->
+                            <Label text="고객 이름: " />
+                            <Label fx:id="customerNameLabel" />
                         </HBox>
                         <HBox alignment="CENTER_LEFT">
-                            <Label text="처리 일자: 2021-10-31" />
-<!--                        <Label fx:id="processingDateLabel" />-->
+                            <Label text="처리 일자: " />
+                            <Label fx:id="processingDateLabel" />
                         </HBox>
                         <HBox alignment="CENTER_LEFT">
-                            <Label text="시료 번호: 21-0022" />
-<!--                        <Label fx:id="sampleNumberLabel" />-->
+                            <Label text="시료 번호: " />
+                            <Label fx:id="sampleNumberLabel" />
                         </HBox>
-                    </VBox>
-
-                    <VBox spacing="10">
+                        <HBox alignment="CENTER_LEFT">
+                            <Label text="배양액 종류: " />
+                            <Label fx:id="selectedCultureLabel" />
+                        </HBox>
                         <HBox alignment="CENTER_LEFT">
                             <Label text="재배작물: " />
-                            <TextField fx:id="cropTextField" promptText="재배 작물 입력" />
+                            <Label fx:id="selectedCropLabel" />
                         </HBox>
-                        <HBox alignment="CENTER_LEFT">
-                            <Label text="배양액종류: " />
-                            <TextField fx:id="typeTextField" promptText="배양액 종류 입력" />
-                        </HBox>
+                    </VBox>
+                    <!-- SettingInfo 출력 -->
+                    <VBox spacing="10">
                         <Label fx:id="settingsLabel" lineSpacing="10"/>
                     </VBox>
-
-                    <VBox spacing="10">
-                        <Label text="희석배율: 100 배액" />
-                        <Label text="배양액 C(산·알칼리 함량)" />
-                    </VBox>
-                    <Button text="가져오기" onAction="#loadSettings" />
                 </VBox>
             </AnchorPane>
 
             <!-- 두 번째 팬 -->
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                 <VBox styleClass="vbox-container" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-                    <Label text="배양액 A(1,000L 당 함량)" styleClass="label-bold" />
-                    <VBox spacing="10">
-                        <Label text="Ca(NO3)2·4H2O" />
-                        <Label text="KNO3" />
-                    </VBox>
-                    <Separator orientation="HORIZONTAL" />
-                    <Label text="Fe-EDTA(13%)" />
-                </VBox>
-            </AnchorPane>
-
-            <!-- 세 번째 팬 -->
-            <AnchorPane prefHeight="200.0" prefWidth="200.0">
-                <VBox styleClass="vbox-container" spacing="10" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-                    <Label text="배양액 B(1,000L 당 함량)" styleClass="label-bold" />
-                    <VBox spacing="10">
-                        <Label text="KNO3" />
-                        <Label text="NH4H2PO4" />
-                    </VBox>
-                    <VBox spacing="10">
-                        <Label text="K2SO4" />
-                        <Label text="MgSO4·7H2O" />
-                    </VBox>
-                    <Separator orientation="HORIZONTAL" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"/>
-                    <VBox spacing="10">
-                        <Label text="CuSO4·5H2O" />
-                        <Label text="H3BO3" />
-                    </VBox>
-                    <Label text="MnSO4·5H2O" />
-                    <VBox spacing="10">
-                        <Label text="ZnSO4·7H2O" />
-                        <Label text="Na2MoO4·7H2O" />
-                    </VBox>
                 </VBox>
             </AnchorPane>
         </SplitPane>

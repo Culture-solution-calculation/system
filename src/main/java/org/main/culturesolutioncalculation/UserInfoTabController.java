@@ -50,12 +50,11 @@ public class UserInfoTabController {
     @FXML
     private void saveUserInfo() {
         if(userInfo != null) {
-            userInfo.setCustomerName(username.getText());
+            userInfo.setCustomerName(username.getText().toString());
             userInfo.setProcessingDate(date.getValue());
-            userInfo.setSampleNumber(sampleNumber.getText());
+            userInfo.setSampleNumber(sampleNumber.getText().toString());
             userInfo.setSelectedCulture(listView.getSelectionModel().getSelectedItem());
             userInfo.setSelectedCrop(comboBox.getValue());
-//            System.out.println(userInfo.getSelectedCrop());
         } else {
             System.err.println("UserInfo 객체가 초기화되지 않았습니다.");
         }

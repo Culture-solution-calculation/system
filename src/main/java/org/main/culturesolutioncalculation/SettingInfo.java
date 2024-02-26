@@ -50,10 +50,7 @@ public class SettingInfo {
 
     @Override
     public String toString() {
-        return "SettingInfo {" +
-                "Group=" + group +
-                ", RadioButton=" + radioButton+
-                ", value=" + value +
-                '}';
+        return "RadioButton=" + radioButton+
+                ", value=" + value;
     }
 }

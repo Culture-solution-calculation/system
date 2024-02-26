@@ -12,6 +12,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SettingTabController {
+
+    private SettingInfo settingInfo = MainController.getSettingInfo();
     @FXML
     private RadioButton group1_1, group1_2, group1_3;
     @FXML
@@ -162,7 +164,11 @@ public class SettingTabController {
 //    }
 
     @FXML
-    public void saveSettings() {
-        SettingInfo.setGroupInfoMap(groupInfoMap);
+    public void saveSettingInfo() {
+        if (settingInfo != null) {
+            settingInfo.setGroupInfoMap(groupInfoMap);
+        } else {
+            System.err.println("SettingInfo 객체가 초기화되지 않았습니다.");
+        }
     }
 }

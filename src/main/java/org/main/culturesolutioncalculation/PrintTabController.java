@@ -13,9 +13,7 @@ import java.util.Map;
 public class PrintTabController {
     MainController mainController = new MainController();
     UserInfo userInfo = mainController.getUserInfo();
-
-    @FXML
-    private Label settingsLabel;
+    SettingInfo settingInfo = mainController.getSettingInfo();
 
     @FXML
     private Label customerNameLabel;
@@ -29,6 +27,9 @@ public class PrintTabController {
     private Label selectedCropLabel;
 
     @FXML
+    private Label settingsLabel;
+
+    @FXML
     public void load() {
         try {
             customerNameLabel.setText(userInfo.getCustomerName());
@@ -36,34 +37,15 @@ public class PrintTabController {
             sampleNumberLabel.setText(userInfo.getSampleNumber());
             selectedCultureLabel.setText(userInfo.getSelectedCulture());
             selectedCropLabel.setText(userInfo.getSelectedCrop());
+
+            for (Map.Entry<String, SettingInfo> entry : settingInfo.getGroupInfoMap().entrySet()) {
+                String settingText = entry.getKey() + ": " + entry.getValue().toString();
+                settingsLabel.setText(settingsLabel.getText() + settingText + "\n");
+            }
+
         } catch (NullPointerException e) {
             System.out.println("값이 입력되지 않았습니다.");
         }
-    }
-
-    public void loadSettings() throws SQLException {
-//        ConfigurationManager configManager = new ConfigurationManager();
-//        try {
-//            ConfigurationDTO configurationDTO = configManager.getConfiguration();
-//
-//            String elementalYnLabel = configurationDTO.getElementalYn().equals("1") ? "Y" : "N";
-//
-//            // ConfigurationDTO에서 설정 값을 추출하여 Label에 출력
-//            String settingsText = "Multi Unit Sequence: " + configurationDTO.getMultiUnitSeq() + "\n" +
-//                    "Trace Unit Sequence: " + configurationDTO.getTraceUnitSeq() + "\n" +
-//                    "CN Fertilizer Sequence: " + configurationDTO.getCnFertilizerSeq() + "\n" +
-//                    "Fe Fertilizer Sequence: " + configurationDTO.getFeFertilizerSeq() + "\n" +
-//                    "B Fertilizer Sequence: " + configurationDTO.getBFertilizerSeq() + "\n" +
-//                    "Mn Fertilizer Sequence: " + configurationDTO.getMnFertilizerSeq() + "\n" +
-//                    "Mo Fertilizer Sequence: " + configurationDTO.getMoFertilizerSeq() + "\n" +
-//                    "Input Unit Sequence: " + configurationDTO.getInputUnitSeq() + "\n" +
-//                    "Elemental YN: " + elementalYnLabel;
-//
-//            // 설정 값을 Label에 출력
-//            settingsLabel.setText(settingsText);
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
     }
 
 }

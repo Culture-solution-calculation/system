@@ -179,7 +179,7 @@
                     </BorderPane>
                 </VBox>
             </HBox>
-            <Button text="저장" onAction="#saveSettings" />
+            <Button text="저장" onAction="#saveSettingInfo" />
         </VBox>
     </content>
 </Tab>

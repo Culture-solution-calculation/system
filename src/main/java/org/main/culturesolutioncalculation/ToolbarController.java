@@ -1,5 +1,6 @@
 package org.main.culturesolutioncalculation;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +14,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -124,9 +126,30 @@ public class ToolbarController {
     public void onCalcButtonClick(ActionEvent actionEvent) {
         // 설정 정보 가져오기
         Map<String, SettingInfo> groupInfoMap = settingInfo.getGroupInfoMap();
+
+        // 다량원소 탭 설정 정보
+        Map<String, SettingInfo> macroSettings = new HashMap<>();
+        macroSettings.put("설정 다량원소 단위", groupInfoMap.get("설정 다량원소 단위"));
+        macroSettings.put("질산칼슘 비료", groupInfoMap.get("질산칼슘 비료"));
+        macroSettings.put("원수 고려 유무", groupInfoMap.get("원수 고려 유무"));
+        macroSettings.put("원수 입력 단위", groupInfoMap.get("원수 입력 단위"));
+
+        // 미량원소 탭 설정 정보
+        Map<String, SettingInfo> microSettings = new HashMap<>();
+        microSettings.put("설정 미량원소 단위", groupInfoMap.get("설정 미량원소 단위"));
+        microSettings.put("철 비료", groupInfoMap.get("철 비료"));
+        microSettings.put("붕소 비료", groupInfoMap.get("붕소 비료"));
+        microSettings.put("망간 비료", groupInfoMap.get("망간 비료"));
+        microSettings.put("몰리브뎀 비료", groupInfoMap.get("몰리브뎀 비료"));
+        microSettings.put("원수 고려 유무", groupInfoMap.get("원수 고려 유무"));
+        microSettings.put("원수 입력 단위", groupInfoMap.get("원수 입력 단위"));
+
         // 계산식 설정
         MacroTabController macroTabController = new MacroTabController();
-        macroTabController.updateTable(groupInfoMap);
+        macroTabController.updateTable(macroSettings);
+
+        MicroTabController microTabController = new MicroTabController();
+        microTabController.updateTable(microSettings);
     }
 
 }

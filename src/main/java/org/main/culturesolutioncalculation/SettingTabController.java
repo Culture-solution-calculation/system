@@ -125,7 +125,6 @@ public class SettingTabController {
 
             groupInfoMap.put(groupName, settingInfo);
 
-            printGroupInfoMap();
         });
 
         dialog.showAndWait();
@@ -161,21 +160,6 @@ public class SettingTabController {
 //
 //        dialog.showAndWait();
 //    }
-
-//    public Map<String, SettingInfo> getGroupInfoMap() {
-//        return groupInfoMap;
-//    }
-
-    private void printGroupInfoMap() {
-        for (Map.Entry<String, SettingInfo> entry : groupInfoMap.entrySet()) {
-            String groupName = entry.getKey();
-            SettingInfo settingInfo = entry.getValue();
-            System.out.println("Group: " + groupName);
-            System.out.println("RadioButton: " + settingInfo.getRadioButton());
-            System.out.println("Value: " + settingInfo.getValue());
-        }
-        System.out.println("----");
-    }
 
     @FXML
     public void saveSettings() {

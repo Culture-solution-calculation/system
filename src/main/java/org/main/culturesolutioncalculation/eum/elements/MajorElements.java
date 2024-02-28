@@ -1,4 +1,4 @@
-package org.main.culturesolutioncalculation.elements;
+package org.main.culturesolutioncalculation.eum.elements;
 
 public enum MajorElements {
     CalciumNitrateTetrahydrate("질산칼슘 4수염","Ca(NO₃)₂•4H₂O",236),
@@ -17,12 +17,12 @@ public enum MajorElements {
 
     private final String name;
     private final String symbol;
-    private final double atomicWeight; // 분자량(g/mol)
+    private final double molecularWeight;
 
-    MajorElements(String name, String symbol, double atomicWeight) {
+    MajorElements(String name, String symbol, double molecularWeight) {
         this.name = name;
         this.symbol = symbol;
-        this.atomicWeight = atomicWeight;
+        this.molecularWeight = molecularWeight;
     }
 
     public String getName() {
@@ -33,7 +33,11 @@ public enum MajorElements {
         return symbol;
     }
 
-    public double getAtomicWeight() {
-        return atomicWeight;
+    public double getMolecularWeight() {
+        return molecularWeight;
+    }
+
+    public double getQuantity(double count){
+        return this.molecularWeight * count;
     }
 }

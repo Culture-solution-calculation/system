@@ -1,4 +1,4 @@
-package org.main.culturesolutioncalculation.elements;
+package org.main.culturesolutioncalculation.eum.elements;
 
 public enum TraceElements {
     Fe_EDTA("킬레이트철","Fe-EDTA(13%)",430),
@@ -15,12 +15,12 @@ public enum TraceElements {
 
     private final String name;
     private final String symbol;
-    private final double atomicWeight; // 분자량(g/mol)
+    private final double molecularWeight;
 
-    TraceElements(String name, String symbol, double atomicWeight) {
+    TraceElements(String name, String symbol, double molecularWeight) {
         this.name = name;
         this.symbol = symbol;
-        this.atomicWeight = atomicWeight;
+        this.molecularWeight = molecularWeight;
     }
 
     public String getName() {
@@ -31,7 +31,7 @@ public enum TraceElements {
         return symbol;
     }
 
-    public double getAtomicWeight() {
-        return atomicWeight;
+    public double getMolecularWeight() {
+        return molecularWeight;
     }
 }

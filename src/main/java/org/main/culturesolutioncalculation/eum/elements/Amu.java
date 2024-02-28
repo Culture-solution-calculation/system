@@ -1,4 +1,4 @@
-package org.main.culturesolutioncalculation.elements;
+package org.main.culturesolutioncalculation.eum.elements;
 
 public enum Amu {
     NO3_N("질산 이온(NO₃⁻)","NO3-N",14.01),

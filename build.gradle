@@ -39,6 +39,7 @@ dependencies {
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
     implementation 'com.microsoft.sqlserver:mssql-jdbc:12.6.0.jre11'
     implementation 'mysql:mysql-connector-java:8.0.31'
+    implementation 'com.opencsv:opencsv:5.7.1'
 }
 
 test {

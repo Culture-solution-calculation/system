@@ -63,33 +63,33 @@ public class MicroTabController {
         tableView.setItems(data);
     }
 
-    public void updateTable(Map<String, SettingInfo> groupInfoMap) {
-        if (tableView == null) {
-            initialize();
-        }
-
-        String settingElementUnit = groupInfoMap.get("설정 미량원소 단위").getValue().toString();
-        String ironFertilizer = groupInfoMap.get("철 비료").getValue().toString();
-        String boronFertilizer = groupInfoMap.get("붕소 비료").getValue().toString();
-        String manganeseFertilizer = groupInfoMap.get("망간 비료").getValue().toString();
-        String molybdenumFertilizer = groupInfoMap.get("몰리브뎀 비료").getValue().toString();
-
-        // 특정 행에 값 설정
-        int rowIndex = 4; // 5번째 행
-        data.get(rowIndex).set(3, settingElementUnit); // 설정 다량원소 단위 열
-        data.get(rowIndex).set(4, ironFertilizer); // 질산칼슘 비료 열
-        data.get(rowIndex).set(5, boronFertilizer); // 붕소 비료 열
-        data.get(rowIndex).set(6, manganeseFertilizer); // 망간 비료 열
-        data.get(rowIndex).set(7, molybdenumFertilizer); // 몰리브뎀 비료 열
-
-        tableView.setItems(null); // 기존 데이터를 제거합니다.
-        tableView.setItems(data);
-
-        Platform.runLater(() -> {
-            tableView.refresh();
-        });
-
-        printTableViewData();
+    public void updateTable(Map<String, Integer> totalSetting) {
+//        if (tableView == null) {
+//            initialize();
+//        }
+//
+//        String settingElementUnit = groupInfoMap.get("설정 미량원소 단위").getValue().toString();
+//        String ironFertilizer = groupInfoMap.get("철 비료").getValue().toString();
+//        String boronFertilizer = groupInfoMap.get("붕소 비료").getValue().toString();
+//        String manganeseFertilizer = groupInfoMap.get("망간 비료").getValue().toString();
+//        String molybdenumFertilizer = groupInfoMap.get("몰리브뎀 비료").getValue().toString();
+//
+//        // 특정 행에 값 설정
+//        int rowIndex = 4; // 5번째 행
+//        data.get(rowIndex).set(3, settingElementUnit); // 설정 다량원소 단위 열
+//        data.get(rowIndex).set(4, ironFertilizer); // 질산칼슘 비료 열
+//        data.get(rowIndex).set(5, boronFertilizer); // 붕소 비료 열
+//        data.get(rowIndex).set(6, manganeseFertilizer); // 망간 비료 열
+//        data.get(rowIndex).set(7, molybdenumFertilizer); // 몰리브뎀 비료 열
+//
+//        tableView.setItems(null); // 기존 데이터를 제거합니다.
+//        tableView.setItems(data);
+//
+//        Platform.runLater(() -> {
+//            tableView.refresh();
+//        });
+//
+//        printTableViewData();
     }
 
     public void printTableViewData() {

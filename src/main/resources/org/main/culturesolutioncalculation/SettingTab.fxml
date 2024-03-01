@@ -17,40 +17,6 @@
             <HBox spacing="10">
                 <BorderPane styleClass="outer-borderpane">
                     <top>
-                        <Label text="단위" styleClass="label-bold" />
-                    </top>
-                    <center>
-                        <HBox spacing="5">
-                            <!-- 설정 다량원소 단위 -->
-                            <VBox alignment="CENTER" spacing="5">
-                                <Label text="설정 다량원소 단위" />
-                                <BorderPane styleClass="borderpane" minHeight="100">
-                                    <center>
-                                        <VBox spacing="5">
-                                            <RadioButton text="ppm(피피엠)" fx:id="group1_1" />
-                                            <RadioButton text="mM(밀리몰)" fx:id="group1_2" />
-                                            <RadioButton text="me(밀리당량)" fx:id="group1_3" />
-                                        </VBox>
-                                    </center>
-                                </BorderPane>
-                            </VBox>
-                            <!-- 설정 미량원소 단위 -->
-                            <VBox alignment="CENTER" spacing="5">
-                                <Label text="설정 미량원소 단위" />
-                                <BorderPane styleClass="borderpane" minHeight="100">
-                                    <center>
-                                        <VBox spacing="5">
-                                            <RadioButton text="ppm(피피엠)" fx:id="group2_1" />
-                                            <RadioButton text="µM(마이크로몰)" fx:id="group2_2"  />
-                                        </VBox>
-                                    </center>
-                                </BorderPane>
-                            </VBox>
-                        </HBox>
-                    </center>
-                </BorderPane>
-                <BorderPane styleClass="outer-borderpane">
-                    <top>
                         <Label text="다량원소(선택)" styleClass="label-bold" />
                     </top>
                     <center>
@@ -68,9 +34,6 @@
                         </VBox>
                     </center>
                 </BorderPane>
-            </HBox>
-
-            <HBox spacing="10">
                 <BorderPane styleClass="outer-borderpane">
                     <top>
                         <Label text="미량원소(선택)" styleClass="label-bold" />
@@ -134,6 +97,40 @@
             <HBox spacing="10">
                 <BorderPane styleClass="outer-borderpane">
                     <top>
+                        <Label text="단위" styleClass="label-bold" />
+                    </top>
+                    <center>
+                        <HBox spacing="5">
+                            <!-- 설정 다량원소 단위 -->
+                            <VBox alignment="CENTER" spacing="5">
+                                <Label text="설정 다량원소 단위" />
+                                <BorderPane styleClass="borderpane" minHeight="100">
+                                    <center>
+                                        <VBox spacing="5">
+                                            <RadioButton text="ppm(피피엠)" fx:id="group1_1" />
+                                            <RadioButton text="mM(밀리몰)" fx:id="group1_2" />
+                                            <RadioButton text="me(밀리당량)" fx:id="group1_3" />
+                                        </VBox>
+                                    </center>
+                                </BorderPane>
+                            </VBox>
+                            <!-- 설정 미량원소 단위 -->
+                            <VBox alignment="CENTER" spacing="5">
+                                <Label text="설정 미량원소 단위" />
+                                <BorderPane styleClass="borderpane" minHeight="100">
+                                    <center>
+                                        <VBox spacing="5">
+                                            <RadioButton text="ppm(피피엠)" fx:id="group2_1" />
+                                            <RadioButton text="µM(마이크로몰)" fx:id="group2_2"  />
+                                        </VBox>
+                                    </center>
+                                </BorderPane>
+                            </VBox>
+                        </HBox>
+                    </center>
+                </BorderPane>
+                <BorderPane styleClass="outer-borderpane">
+                    <top>
                         <Label text="원수" styleClass="label-bold" />
                     </top>
                     <center>
@@ -165,6 +162,9 @@
                         </HBox>
                     </center>
                 </BorderPane>
+            </HBox>
+
+            <HBox spacing="10">
                 <!-- 도움말 -->
                 <VBox alignment="CENTER" spacing="5">
                     <Label text="도움말" />
@@ -179,7 +179,11 @@
                     </BorderPane>
                 </VBox>
             </HBox>
-            <Button text="저장" onAction="#saveSettingInfo" />
+
+            <HBox alignment="CENTER" spacing="10">
+                <Button text="이전" onAction="#prevButton" />
+                <Button text="다음" onAction="#saveSettingInfo" />
+            </HBox>
         </VBox>
     </content>
 </Tab>

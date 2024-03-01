@@ -31,10 +31,10 @@ public class Main extends Application {
 
     private static void initStage(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(Main.class.getResource("Main.fxml"));
-        Scene scene = new Scene(root, 900, 700);
+        Scene scene = new Scene(root, 950, 700);
 
         stage.setTitle("배양액 계산 프로그램");
-        stage.setMinWidth(900);
+        stage.setMinWidth(950);
         stage.setMinHeight(700);
 
         stage.setScene(scene);

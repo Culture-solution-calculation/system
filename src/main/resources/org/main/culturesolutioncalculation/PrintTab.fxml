@@ -30,7 +30,7 @@
                         </HBox>
                         <HBox alignment="CENTER_LEFT">
                             <Label text="연락처: " />
-                            <Label fx:id="contactField" />
+                            <Label fx:id="contactLabel" />
                         </HBox>
                         <HBox alignment="CENTER_LEFT">
                             <Label text="의뢰 일자: " />

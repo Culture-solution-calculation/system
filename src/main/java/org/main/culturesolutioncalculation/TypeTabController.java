@@ -38,20 +38,24 @@ public class TypeTabController {
 
 
     @FXML
-    public void prevButton(ActionEvent actionEvent) {
+    public void prevButton() {
         TabPane tabPane = typeTab.getTabPane();
         int currentIndex = tabPane.getTabs().indexOf(typeTab);
         if (currentIndex > 0) {  // 첫 번째 탭이 아닌 경우에만
             tabPane.getSelectionModel().select(currentIndex - 1);  // 이전 탭으로 이동
         }
-
     }
 
     @FXML
-    public void saveType(ActionEvent actionEvent) {
+    public void saveType() {
+        TabPane tabPane = typeTab.getTabPane();
+        int currentIndex = tabPane.getTabs().indexOf(typeTab);
+
         if(userInfo != null) {
             userInfo.setSelectedCulture(listView.getSelectionModel().getSelectedItem());
             userInfo.setSelectedCrop(comboBox.getValue());
+
+            tabPane.getSelectionModel().select(currentIndex + 1);  // 다 탭으로 이동
         } else {
             System.err.println("UserInfo 객체가 초기화되지 않았습니다.");
         }

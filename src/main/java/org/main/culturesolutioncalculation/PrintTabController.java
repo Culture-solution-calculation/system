@@ -44,7 +44,7 @@ public class PrintTabController {
             selectedCultureLabel.setText(userInfo.getSelectedCulture());
             selectedCropLabel.setText(userInfo.getSelectedCrop());
 
-            for (Map.Entry<String, SettingInfo> entry : settingInfo.getGroupInfoMap().entrySet()) {
+            for (Map.Entry<String, Integer> entry : settingInfo.getTotalSetting().entrySet()) {
                 String settingText = entry.getKey() + ": " + entry.getValue().toString();
                 settingsLabel.setText(settingsLabel.getText() + settingText + "\n");
             }

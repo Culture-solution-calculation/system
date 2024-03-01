@@ -14,6 +14,7 @@
     <TabPane VBox.vgrow="ALWAYS" tabClosingPolicy="UNAVAILABLE">
         <tabs>
             <fx:include source="UserInfoTab.fxml" />
+            <fx:include source="TypeTab.fxml" />
             <fx:include source="SettingTab.fxml" />
             <fx:include source="MacroTab.fxml" />
             <fx:include source="MicroTab.fxml" />

@@ -25,12 +25,20 @@
                             <Label fx:id="customerNameLabel" />
                         </HBox>
                         <HBox alignment="CENTER_LEFT">
-                            <Label text="처리 일자: " />
+                            <Label text="주소: " />
+                            <Label fx:id="addressLabel" />
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT">
+                            <Label text="연락처: " />
+                            <Label fx:id="contactField" />
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT">
+                            <Label text="의뢰 일자: " />
                             <Label fx:id="processingDateLabel" />
                         </HBox>
                         <HBox alignment="CENTER_LEFT">
-                            <Label text="시료 번호: " />
-                            <Label fx:id="sampleNumberLabel" />
+                            <Label text="재배규모: " />
+                            <Label fx:id="scaleLabel" />
                         </HBox>
                         <HBox alignment="CENTER_LEFT">
                             <Label text="배양액 종류: " />

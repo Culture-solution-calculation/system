@@ -6,11 +6,14 @@ import java.time.LocalDate;
 public class UserInfo {
     // 고객 이름
     private String customerName;
-    // 처리 일자
+    // 주소
+    private String address;
+    // 연락처
+    private String contact;
+    // 의뢰 일자
     private LocalDate processingDate;
-    // 시료 번호
-    private String sampleNumber;
-
+    // 재배규모
+    private String scale;
     // 배양액 종류
     private String selectedCulture;
 
@@ -29,6 +32,22 @@ public class UserInfo {
         this.customerName = customerName;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
+    }
+
     public LocalDate getProcessingDate() {
         return processingDate;
     }
@@ -37,12 +56,12 @@ public class UserInfo {
         this.processingDate = processingDate;
     }
 
-    public String getSampleNumber() {
-        return sampleNumber;
+    public String getScale() {
+        return scale;
     }
 
-    public void setSampleNumber(String sampleNumber) {
-        this.sampleNumber = sampleNumber;
+    public void setScale(String scale) {
+        this.scale = scale;
     }
 
     public String getSelectedCrop() {

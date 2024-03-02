@@ -152,9 +152,6 @@ public class ToolbarController {
 
         tableData.setMacroSettings(macroSettings);
         tableData.setMicroSettings(microSettings);
-
-        System.out.println("MacroSettings: " + macroSettings);
-
     }
 
 }

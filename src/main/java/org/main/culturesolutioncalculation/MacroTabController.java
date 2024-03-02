@@ -16,11 +16,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import javafx.util.converter.DefaultStringConverter;
 
 import java.io.IOException;
-import java.util.Map;
 
 public class MacroTabController {
     @FXML

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import java.net.URL?>
+
+<VBox
+    xmlns:fx="http://javafx.com/fxml"
+    fx:controller="org.main.culturesolutioncalculation.MicroResultController">
+    <stylesheets>
+        <URL value="@style/application.css" />
+    </stylesheets>
+
+    <TableView fx:id="tableView" minHeight="500" />
+
+    <HBox alignment="CENTER" spacing="10">
+        <Button text="이전" onAction="#prevButton" />
+        <Button text="다음" onAction="#nextButton" />
+    </HBox>
+</VBox>

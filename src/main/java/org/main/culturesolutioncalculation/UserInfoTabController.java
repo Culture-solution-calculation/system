@@ -6,6 +6,8 @@ import javafx.scene.control.*;
 import java.time.LocalDate;
 
 public class UserInfoTabController {
+    @FXML
+    private Tab userInfoTab;
 
     @FXML
     private TextField username;
@@ -38,8 +40,12 @@ public class UserInfoTabController {
             userInfo.setContact(contact.getText().toString());
             userInfo.setProcessingDate(date.getValue());
             userInfo.setScale(scale.getText().toString());
+
         } else {
             System.err.println("UserInfo 객체가 초기화되지 않았습니다.");
         }
+        TabPane tabPane = userInfoTab.getTabPane();
+        int currentIndex = tabPane.getTabs().indexOf(userInfoTab);
+        tabPane.getSelectionModel().select(currentIndex + 1);
     }
 }

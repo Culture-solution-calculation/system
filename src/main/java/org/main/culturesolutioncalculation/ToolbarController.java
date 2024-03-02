@@ -27,6 +27,10 @@ public class ToolbarController {
 
     private SettingInfo settingInfo = new SettingInfo();
 
+    MainController mainController = new MainController();
+    TableData tableData = mainController.getTableData();
+
+
     @FXML
     public void onEditButtonClick(ActionEvent event) {
     }
@@ -145,11 +149,12 @@ public class ToolbarController {
         microSettings.put("원수 입력 단위", totalSetting.get("원수 입력 단위"));
 
         // 계산식 설정
-        MacroTabController macroTabController = new MacroTabController();
-        macroTabController.updateTable(totalSetting);
 
-        MicroTabController microTabController = new MicroTabController();
-        microTabController.updateTable(totalSetting);
+        tableData.setMacroSettings(macroSettings);
+        tableData.setMicroSettings(microSettings);
+
+        System.out.println("MacroSettings: " + macroSettings);
+
     }
 
 }

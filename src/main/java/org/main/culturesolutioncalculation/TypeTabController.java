@@ -55,7 +55,7 @@ public class TypeTabController {
             userInfo.setSelectedCulture(listView.getSelectionModel().getSelectedItem());
             userInfo.setSelectedCrop(comboBox.getValue());
 
-            tabPane.getSelectionModel().select(currentIndex + 1);  // 다 탭으로 이동
+            tabPane.getSelectionModel().select(currentIndex + 1);
         } else {
             System.err.println("UserInfo 객체가 초기화되지 않았습니다.");
         }

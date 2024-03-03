@@ -7,7 +7,11 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -15,6 +19,7 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
 import javafx.util.converter.DefaultStringConverter;
 
+import java.io.IOException;
 import java.util.Map;
 
 public class MacroResultController {
@@ -41,7 +46,6 @@ public class MacroResultController {
         if (tableView == null) {
             tableView = new TableView<>();
         }
-
 
         String[] columnTitles = {"100 배액 기준", "분자식", "시비량", "단위", "NO3-N", "NH4-N", "P", "K", "Ca", "Mg", "SO4-S"};
         String[] rowTitles = {"설정농도(mM)", "시비농도(mM)", "질산칼슘", "질산칼륨", "제1인산암모늄", "제1인산칼륨", "황산칼륨", "황산마그네슘", "질산마그네슘", "질산암모늄",
@@ -100,7 +104,6 @@ public class MacroResultController {
 
     @FXML
     public void prevButton(ActionEvent event) {
-        // macroTab으로는 어떻게 이동..?
         TabPane tabPane = findTabPane(event);
         if (tabPane != null) {
             int currentIndex = tabPane.getSelectionModel().getSelectedIndex();

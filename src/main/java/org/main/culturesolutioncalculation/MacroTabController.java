@@ -16,6 +16,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import javafx.util.converter.DefaultStringConverter;
 import org.main.culturesolutioncalculation.model.CropNutrientStandard;
 import org.main.culturesolutioncalculation.model.NutrientSolution;
@@ -45,8 +46,8 @@ public class MacroTabController {
         String[] columnTitles = {"다량원소", "NO3", "NH4", "H2PO4", "K", "Ca", "Mg", "SO4"};
         String[] rowTitles = {"기준량", "원수성분", "처방농도"};
 
-        data.clear();
         String[] values = new String[7];
+        data.clear();
 
         for (int i = 0; i < columnTitles.length; i++) {
             final int columnIndex = i;
@@ -84,6 +85,54 @@ public class MacroTabController {
         tableView.setItems(data);
 
         System.out.println(data);
+    }
+
+    @FXML
+    public void refreshButton(ActionEvent actionEvent) {
+        // tableView 초기화
+        String[] columnTitles = {"다량원소", "NO3", "NH4", "H2PO4", "K", "Ca", "Mg", "SO4"};
+        String[] rowTitles = {"기준량", "원수성분", "처방농도"};
+
+        tableView = new TableView<>();
+        data.clear();
+
+        String[] values = getStandardValues(userInfo.getSelectedCulture(), userInfo.getSelectedCrop());
+
+        for (int i = 0; i < columnTitles.length; i++) {
+            final int columnIndex = i;
+            TableColumn<ObservableList<String>, String> column = new TableColumn<>(columnTitles[i]);
+
+            column.setCellValueFactory(cellData -> {
+                ObservableValue<String> cellValue = new SimpleStringProperty(cellData.getValue().get(columnIndex));
+                return cellValue;
+            });
+            column.setCellFactory(TextFieldTableCell.forTableColumn(new DefaultStringConverter()));
+            column.setOnEditCommit(event -> {
+                ObservableList<String> row = event.getRowValue();
+                row.set(columnIndex, event.getNewValue());
+            });
+
+            tableView.getColumns().add(column);
+        }
+
+        for (int i = 0; i < rowTitles.length; i++) {
+            ObservableList<String> row = FXCollections.observableArrayList();
+            row.add(rowTitles[i]);
+            if (i == 0) { // 두 번째 행에 값 추가
+                for (String value : values) {
+                    row.add(value);
+                }
+            } else {
+                for (int j = 1; j < columnTitles.length; j++) {
+                    row.add("");
+                }
+            }
+            data.add(row);
+        }
+
+        tableView.setEditable(true);
+        tableView.setItems(data);
+
     }
 
     private String[] getStandardValues(String culture, String crop) {
@@ -131,62 +180,13 @@ public class MacroTabController {
     }
 
     @FXML
-    public void refreshButton(ActionEvent actionEvent) {
-        // tableView 초기화
-        String[] columnTitles = {"다량원소", "NO3", "NH4", "H2PO4", "K", "Ca", "Mg", "SO4"};
-        String[] rowTitles = {"기준량", "원수성분", "처방농도"};
-
-        tableView = new TableView<>();
-        data.clear();
-
-        String[] values = getStandardValues(userInfo.getSelectedCulture(), userInfo.getSelectedCrop());
-
-        System.out.println(values);
-        for (int i = 0; i < columnTitles.length; i++) {
-            final int columnIndex = i;
-            TableColumn<ObservableList<String>, String> column = new TableColumn<>(columnTitles[i]);
-
-            column.setCellValueFactory(cellData -> {
-                ObservableValue<String> cellValue = new SimpleStringProperty(cellData.getValue().get(columnIndex));
-                return cellValue;
-            });
-            column.setCellFactory(TextFieldTableCell.forTableColumn(new DefaultStringConverter()));
-            column.setOnEditCommit(event -> {
-                ObservableList<String> row = event.getRowValue();
-                row.set(columnIndex, event.getNewValue());
-            });
-
-            tableView.getColumns().add(column);
-        }
-
-        for (int i = 0; i < rowTitles.length; i++) {
-            ObservableList<String> row = FXCollections.observableArrayList();
-            row.add(rowTitles[i]);
-            if (i == 0) { // 두 번째 행에 값 추가
-                for (String value : values) {
-                    row.add(value);
-                }
-            } else {
-                for (int j = 1; j < columnTitles.length; j++) {
-                    row.add("");
-                }
-            }
-            data.add(row);
-        }
-
-        tableView.setEditable(true);
-        tableView.setItems(data);
-
-    }
-
-    @FXML
     public void prevButton(ActionEvent actionEvent) {
         TabPane tabPane = macroTab.getTabPane();
         int currentIndex = tabPane.getTabs().indexOf(macroTab);
         tabPane.getSelectionModel().select(currentIndex - 1);  // 이전 탭으로 이동
     }
 
-    public void saveInput(ActionEvent event) {
+    public void saveInput(ActionEvent event) throws IOException {
         switchScene(event);
         // 테이블 저장
     }
@@ -197,7 +197,6 @@ public class MacroTabController {
             Parent root = loader.load();
 
             TabPane tabPane = findTabPane(event);
-            // 현재 선택된 탭을 새로운 내용으로 대체
             Tab selectedTab = tabPane.getSelectionModel().getSelectedItem();
             selectedTab.setContent(root);
         } catch (IOException e) {

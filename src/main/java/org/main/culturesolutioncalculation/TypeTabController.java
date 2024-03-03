@@ -5,7 +5,13 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
+import java.io.IOException;
+
 public class TypeTabController {
+
+    private MainController mainController = new MainController();
+    private MacroTabController macroTabController = mainController.getMacroTabController();
+
     @FXML
     private Tab typeTab;
 
@@ -20,8 +26,11 @@ public class TypeTabController {
 
     private UserInfo userInfo = MainController.getUserInfo();
 
+    public TypeTabController() throws IOException {
+    }
+
     public void initialize() {
-        listView.getItems().addAll("네덜란드 배양액", "야마자키 배양액", "대한민국 배양액");
+        listView.getItems().addAll("네덜란드 배양액", "야마자키 배양액");
 
         // 네덜란드 배양액을 기본 선택으로 설정
         listView.getSelectionModel().select("네덜란드 배양액");
@@ -57,6 +66,8 @@ public class TypeTabController {
         } else {
             System.err.println("UserInfo 객체가 초기화되지 않았습니다.");
         }
+
+        macroTabController.initialize();
     }
 
     private void updateComboBox(String newValue) {

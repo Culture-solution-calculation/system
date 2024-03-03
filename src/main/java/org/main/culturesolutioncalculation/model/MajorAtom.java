@@ -1,5 +1,6 @@
 package org.main.culturesolutioncalculation.model;
 
+// 다량원소 원소 농도
 public class MajorAtom {
     private double NO3_N;
     private double NH4_N;
@@ -8,7 +9,7 @@ public class MajorAtom {
     private double Ca;
     private double Mg;
     private double SO4_S;
-    private double fertilizerAmount;
+    private double fertilizerAmount; // 시비량
 
     public MajorAtom(double NO3_N, double NH4_N, double P, double K, double Ca, double Mg, double SO4_S, double fertilizerAmount) {
         this.NO3_N = NO3_N;

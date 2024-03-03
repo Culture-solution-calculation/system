@@ -1,5 +1,7 @@
 package org.main.culturesolutioncalculation.model;
 
+
+// 작물 배양액과 기준값
 public class CropNutrientStandard {
     private final  String cropName;
     private final String nutrientSolutionName;

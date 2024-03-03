@@ -1,5 +1,7 @@
 package org.main.culturesolutioncalculation.eum.elements;
 
+
+// 이온,원자 원자량
 public enum Amu {
     NO3_N("질산 이온(NO₃⁻)","NO3-N",14.01),
     NH4_N("암모늄 이온(NH₄⁺)","NH4-N",14.01),

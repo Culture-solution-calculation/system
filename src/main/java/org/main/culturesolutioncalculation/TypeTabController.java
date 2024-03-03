@@ -9,9 +9,6 @@ import java.io.IOException;
 
 public class TypeTabController {
 
-    private MainController mainController = new MainController();
-    private MacroTabController macroTabController = mainController.getMacroTabController();
-
     @FXML
     private Tab typeTab;
 
@@ -66,8 +63,6 @@ public class TypeTabController {
         } else {
             System.err.println("UserInfo 객체가 초기화되지 않았습니다.");
         }
-
-        macroTabController.initialize();
     }
 
     private void updateComboBox(String newValue) {

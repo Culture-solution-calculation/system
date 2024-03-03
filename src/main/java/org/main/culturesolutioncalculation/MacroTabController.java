@@ -46,14 +46,7 @@ public class MacroTabController {
         String[] rowTitles = {"기준량", "원수성분", "처방농도"};
 
         data.clear();
-
-        String[] values;
-
-        if (userInfo.getSelectedCulture() == null){
-            values = new String[7];
-        } else {
-            values = getStandardValues(userInfo.getSelectedCulture(), userInfo.getSelectedCrop());
-        }
+        String[] values = new String[7];
 
         for (int i = 0; i < columnTitles.length; i++) {
             final int columnIndex = i;
@@ -138,6 +131,55 @@ public class MacroTabController {
     }
 
     @FXML
+    public void refreshButton(ActionEvent actionEvent) {
+        // tableView 초기화
+        String[] columnTitles = {"다량원소", "NO3", "NH4", "H2PO4", "K", "Ca", "Mg", "SO4"};
+        String[] rowTitles = {"기준량", "원수성분", "처방농도"};
+
+        tableView = new TableView<>();
+        data.clear();
+
+        String[] values = getStandardValues(userInfo.getSelectedCulture(), userInfo.getSelectedCrop());
+
+        System.out.println(values);
+        for (int i = 0; i < columnTitles.length; i++) {
+            final int columnIndex = i;
+            TableColumn<ObservableList<String>, String> column = new TableColumn<>(columnTitles[i]);
+
+            column.setCellValueFactory(cellData -> {
+                ObservableValue<String> cellValue = new SimpleStringProperty(cellData.getValue().get(columnIndex));
+                return cellValue;
+            });
+            column.setCellFactory(TextFieldTableCell.forTableColumn(new DefaultStringConverter()));
+            column.setOnEditCommit(event -> {
+                ObservableList<String> row = event.getRowValue();
+                row.set(columnIndex, event.getNewValue());
+            });
+
+            tableView.getColumns().add(column);
+        }
+
+        for (int i = 0; i < rowTitles.length; i++) {
+            ObservableList<String> row = FXCollections.observableArrayList();
+            row.add(rowTitles[i]);
+            if (i == 0) { // 두 번째 행에 값 추가
+                for (String value : values) {
+                    row.add(value);
+                }
+            } else {
+                for (int j = 1; j < columnTitles.length; j++) {
+                    row.add("");
+                }
+            }
+            data.add(row);
+        }
+
+        tableView.setEditable(true);
+        tableView.setItems(data);
+
+    }
+
+    @FXML
     public void prevButton(ActionEvent actionEvent) {
         TabPane tabPane = macroTab.getTabPane();
         int currentIndex = tabPane.getTabs().indexOf(macroTab);
@@ -151,7 +193,7 @@ public class MacroTabController {
 
     private void switchScene(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("MacroInput.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("MacroResult.fxml"));
             Parent root = loader.load();
 
             TabPane tabPane = findTabPane(event);

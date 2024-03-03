@@ -7,12 +7,18 @@ public class MainController {
 
     private static SettingInfo settingInfo = new SettingInfo();
 
+    private static TableData tableData = new TableData();
+
     public static UserInfo getUserInfo() {
         return userInfo;
     }
 
     public static SettingInfo getSettingInfo() {
         return settingInfo;
+    }
+
+    public static TableData getTableData() {
+        return tableData;
     }
 
 }

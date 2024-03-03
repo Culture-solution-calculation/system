@@ -4,16 +4,16 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Modality;
-import org.main.culturesolutioncalculation.DAO.ConfigurationManager;
-import org.main.culturesolutioncalculation.DTO.ConfigurationDTO;
 
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
 public class SettingTabController {
 
     private SettingInfo settingInfo = MainController.getSettingInfo();
+
+    @FXML
+    private Tab settingTab;
     @FXML
     private RadioButton group1_1, group1_2, group1_3;
     @FXML
@@ -79,96 +79,61 @@ public class SettingTabController {
 
         group9_1.setToggleGroup(group9);
         group9_2.setToggleGroup(group9);
-
-        addRadioButtonsToGroup(group1, "설정 다량원소 단위", group1_1, group1_2, group1_3);
-        addRadioButtonsToGroup(group2, "설정 미량원소 단위", group2_1, group2_2);
-        addRadioButtonsToGroup(group3, "질산칼슘 비료", group3_1, group3_2);
-        addRadioButtonsToGroup(group4, "철 비료", group4_1, group4_2, group4_3);
-        addRadioButtonsToGroup(group5, "붕소 비료", group5_1, group5_2);
-        addRadioButtonsToGroup(group6, "망간 비료", group6_1, group6_2);
-        addRadioButtonsToGroup(group7, "몰리브뎀 비료", group7_1, group7_2);
-        addRadioButtonsToGroup(group8, "원수 고려 유무", group8_1, group8_2);
-        addRadioButtonsToGroup(group9, "원수 입력 단위", group9_1, group9_2);
     }
 
-    // 라디오 버튼을 그룹에 추가하고 그룹 이름을 맵에 저장
-    private void addRadioButtonsToGroup(ToggleGroup group, String groupName, RadioButton... radioButtons) {
-        for (RadioButton radioButton : radioButtons) {
-            radioButton.setToggleGroup(group);
-            groupNamesMap.put(radioButton, groupName);
-            radioButton.setOnAction(this::showInputDialog);
+    private Map<String, Integer> getSelectedValues() {
+        Map<String, Integer> selectedValues = new HashMap<>();
+
+        // 각 라디오 버튼에서 선택된 값을 가져와서 맵에 추가
+        selectedValues.put("질산칼슘 비료", getSelectedValue(group1));
+        selectedValues.put("철 비료", getSelectedValue(group2));
+        selectedValues.put("붕소 비료", getSelectedValue(group3));
+        selectedValues.put("망간 비료", getSelectedValue(group4));
+        selectedValues.put("몰리브뎀 비료", getSelectedValue(group5));
+        selectedValues.put("설정 다량원소 단위", getSelectedValue(group6));
+        selectedValues.put("설정 미량원소 단위", getSelectedValue(group7));
+        selectedValues.put("원수 입력 단위", getSelectedValue(group9));
+
+        String elementalYnText = getSelectedStringValue(group8);
+        selectedValues.put("원수 고려 유무", "고려합니다".equals(elementalYnText) ? 1 : 0);
+
+        return selectedValues;
+    }
+
+    private String getSelectedStringValue(ToggleGroup group) {
+        RadioButton selectedRadioButton = (RadioButton) group.getSelectedToggle();
+        return selectedRadioButton != null ? selectedRadioButton.getText() : null;
+    }
+
+    private Integer getSelectedValue(ToggleGroup group) {
+        RadioButton selectedRadioButton = (RadioButton) group.getSelectedToggle();
+        if (selectedRadioButton != null) {
+            String selectedId = selectedRadioButton.getId();
+            String[] parts = selectedId.split("_");
+            return Integer.parseInt(parts[1]);
+        } else {
+            return null; // 선택된 값이 없을 경우
         }
     }
 
     @FXML
-    private void showInputDialog(ActionEvent event) {
-        RadioButton radioButton = (RadioButton) event.getSource();
-        String groupName = groupNamesMap.get(radioButton);
-
-        // 모달 다이얼로그 생성
-        Alert dialog = new Alert(Alert.AlertType.CONFIRMATION);
-        dialog.initModality(Modality.WINDOW_MODAL);
-        dialog.setTitle(groupName);
-
-        TextField textField = new TextField();
-        dialog.getDialogPane().setContent(textField);
-
-        dialog.getDialogPane().lookupButton(ButtonType.OK).addEventFilter(ActionEvent.ACTION, e -> {
-            String radioButtonText = radioButton.getText();
-            Integer input = Integer.valueOf(textField.getText());
-
-            // 이전에 저장된 SettingInfo가 있다면 제거
-            groupInfoMap.remove(groupName);
-
-            SettingInfo settingInfo = new SettingInfo();
-            settingInfo.setGroup(groupName);
-            settingInfo.setRadioButton(radioButtonText);
-            settingInfo.setValue(input);
-
-            groupInfoMap.put(groupName, settingInfo);
-
-        });
-
-        dialog.showAndWait();
-
-        // 여기서 groupInfoMap을 업데이트
+    public void prevButton() {
+        TabPane tabPane = settingTab.getTabPane();
+        int currentIndex = tabPane.getTabs().indexOf(settingTab);
+        if (currentIndex > 0) {  // 첫 번째 탭이 아닌 경우에만
+            tabPane.getSelectionModel().select(currentIndex - 1);  // 이전 탭으로 이동
+        }
     }
-
-
-//    private void showInputDialog(ActionEvent event) {
-//        RadioButton radioButton = (RadioButton) event.getSource();
-//        String groupName = groupNamesMap.get(radioButton);
-//
-//        // 모달 다이얼로그 생성
-//        Alert dialog = new Alert(Alert.AlertType.CONFIRMATION);
-//        dialog.initModality(Modality.WINDOW_MODAL);
-//        dialog.setTitle(groupName);
-//
-//        TextField textField = new TextField();
-//        dialog.getDialogPane().setContent(textField);
-//
-//        dialog.getDialogPane().lookupButton(ButtonType.OK).addEventFilter(ActionEvent.ACTION, e -> {
-//            String radioButtonText = radioButton.getText();
-//            Integer input = Integer.valueOf(textField.getText());
-//
-//            // 이전에 저장된 SettingInfo가 있다면 제거
-//            groupInfoMap.remove(groupName);
-//
-//            SettingInfo settingInfo = new SettingInfo(groupName, radioButtonText, input);
-//            groupInfoMap.put(groupName, settingInfo);
-//
-//            printGroupInfoMap();
-//        });
-//
-//        dialog.showAndWait();
-//    }
 
     @FXML
     public void saveSettingInfo() {
-        if (settingInfo != null) {
-            settingInfo.setGroupInfoMap(groupInfoMap);
-        } else {
-            System.err.println("SettingInfo 객체가 초기화되지 않았습니다.");
-        }
+        Map<String, Integer> selectedValues = getSelectedValues();
+        settingInfo.setTotalSetting(selectedValues);
+
+        TabPane tabPane = settingTab.getTabPane();
+        int currentIndex = tabPane.getTabs().indexOf(settingTab);
+        tabPane.getSelectionModel().select(currentIndex + 1);
+
     }
+
 }

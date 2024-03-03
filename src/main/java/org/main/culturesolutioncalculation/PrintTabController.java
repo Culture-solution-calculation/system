@@ -18,9 +18,13 @@ public class PrintTabController {
     @FXML
     private Label customerNameLabel;
     @FXML
+    private Label addressLabel;
+    @FXML
+    private Label contactLabel;
+    @FXML
     private Label processingDateLabel;
     @FXML
-    private Label sampleNumberLabel;
+    private Label scaleLabel;
     @FXML
     private Label selectedCultureLabel;
     @FXML
@@ -33,12 +37,14 @@ public class PrintTabController {
     public void load() {
         try {
             customerNameLabel.setText(userInfo.getCustomerName());
+            addressLabel.setText(userInfo.getAddress());
+            contactLabel.setText(userInfo.getContact());
             processingDateLabel.setText(userInfo.getProcessingDate().toString());
-            sampleNumberLabel.setText(userInfo.getSampleNumber());
+            scaleLabel.setText(userInfo.getScale());
             selectedCultureLabel.setText(userInfo.getSelectedCulture());
             selectedCropLabel.setText(userInfo.getSelectedCrop());
 
-            for (Map.Entry<String, SettingInfo> entry : settingInfo.getGroupInfoMap().entrySet()) {
+            for (Map.Entry<String, Integer> entry : settingInfo.getTotalSetting().entrySet()) {
                 String settingText = entry.getKey() + ": " + entry.getValue().toString();
                 settingsLabel.setText(settingsLabel.getText() + settingText + "\n");
             }

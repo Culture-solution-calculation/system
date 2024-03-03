@@ -8,62 +8,36 @@
      xmlns:fx="http://javafx.com/fxml"
      fx:controller="org.main.culturesolutioncalculation.UserInfoTabController"
      fx:id="userInfoTab"
-     text="사용자 정보">
+     text="사용자정보">
     <content>
         <VBox alignment="CENTER" spacing="10">
             <stylesheets>
                 <URL value="@style/application.css" />
             </stylesheets>
-            <VBox>
-                <HBox spacing="10" alignment="CENTER_LEFT">
-                    <Label text="고객 이름: " />
+            <VBox spacing="5">
+                <HBox spacing="10">
+                    <Label text="성명: " />
                     <TextField fx:id="username" promptText="입력" />
-
-                    <Label text="처리 일자: " />
+                </HBox>
+                <HBox spacing="5">
+                    <Label text="주소: " />
+                    <TextField fx:id="address" promptText="입력" />
+                </HBox>
+                <HBox spacing="5">
+                    <Label text="연락처: " />
+                    <TextField fx:id="contact" promptText="입력" />
+                </HBox>
+                <HBox spacing="5">
+                    <Label text="의뢰 일자: " />
                     <DatePicker fx:id="date" />
-
-                    <Label text="시료 번호: " />
-                    <TextField fx:id="sampleNumber" promptText="입력" />
+                </HBox>
+                <HBox spacing="5">
+                    <Label text="재배규모: " />
+                    <TextField fx:id="scale" promptText="입력" />
                 </HBox>
             </VBox>
 
-            <SplitPane dividerPositions="0.2">
-                <stylesheets>
-                    <URL value="@style/application.css" />
-                </stylesheets>
-                <!-- 첫 번째 팬 -->
-                <AnchorPane prefHeight="200.0" prefWidth="200.0">
-                    <VBox alignment="CENTER" spacing="50">
-                        <!-- 배양액 선택 ListView -->
-                        <VBox>
-                            <Label text="* 배양액 선택" styleClass="label-bold" />
-                            <ListView fx:id="listView" prefWidth="150" prefHeight="150.0" />
-                        </VBox>
-                        <!-- 재배 작물 ComboBox -->
-                        <VBox>
-                            <Label text="* 재배 작물 선택" styleClass="label-bold" />
-                            <ComboBox fx:id="comboBox" prefWidth="150" promptText="** 재배작물 **" />
-                        </VBox>
-                    </VBox>
-                </AnchorPane>
-
-                <!-- 두 번째 팬 -->
-                <AnchorPane>
-                    <VBox alignment="CENTER" spacing="10">
-                        <HBox alignment="CENTER_LEFT" spacing="50">
-                            <Label text="배양액 조성표" styleClass="label-bold" />
-                            <VBox>
-                                <Label text="* 순 : 순수수경  암 : 양면재배  사 : 사경재배   암-순 : 암면재배-순환식" />
-                                <Label text="* 파 : 파트재배  페 : 페놀수지  우 : 우레탄수지   경 : 경석" />
-                            </VBox>
-                        </HBox>
-
-                        <TableView fx:id="tableView" minHeight="400"/>
-                    </VBox>
-                </AnchorPane>
-            </SplitPane>
-
-            <Button text="저장" onAction="#saveUserInfo" />
+            <Button text="다음" onAction="#saveUserInfo" />
         </VBox>
     </content>
 </Tab>

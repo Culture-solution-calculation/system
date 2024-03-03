@@ -2,7 +2,6 @@ package org.main.culturesolutioncalculation;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
@@ -35,7 +34,6 @@ public class TypeTabController {
 
         });
     }
-
 
     @FXML
     public void prevButton() {

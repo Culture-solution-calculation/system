@@ -2,17 +2,27 @@ package org.main.culturesolutioncalculation;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import org.main.culturesolutioncalculation.model.CropNutrientStandard;
+import org.main.culturesolutioncalculation.model.NutrientSolution;
+import org.main.culturesolutioncalculation.service.CSVDataReader;
+
+import java.util.ArrayList;
 
 public class TypeData {
+
     public static ObservableList<String> getCropList(String type) {
         ObservableList<String> cropList = FXCollections.observableArrayList();
 
-        if ("네덜란드 배양액".equals(type)) {
-            cropList.addAll("딸기(파)", "딸기(순)", "꽃상추(순)", "가지(암)", "가지(암-순)", "쫑(암)");
-        } else if ("야마자키 배양액".equals(type)) {
-            cropList.addAll("");
-        } else if ("대한민국 배양액".equals(type)) {
-            cropList.addAll("");
+        CSVDataReader csvDataReader = new CSVDataReader();
+        ArrayList<String> nutrientSolutionList = csvDataReader.readDir();
+        for (String nutrientSolutionName : nutrientSolutionList) {
+            if (nutrientSolutionName.equals(type)) {
+                NutrientSolution nutrientSolution = csvDataReader.readFile(nutrientSolutionName);
+                for (CropNutrientStandard crop : nutrientSolution.getCropList()) {
+                    cropList.add(crop.getCropName());
+                }
+                break;
+            }
         }
 
         return cropList;
@@ -21,27 +31,48 @@ public class TypeData {
     public static ObservableList<String[]> getCompositionData(String type) {
         ObservableList<String[]> compositionData = FXCollections.observableArrayList();
 
-        // 배양액 조성표 데이터 설정
-        if ("네덜란드 배양액".equals(type)) {
-            compositionData.addAll(
-                    new String[]{"비료염", "딸기(파)", "딸기(순)", "꽃상추(순)", "가지(암)", "가지(암-순)", "쫑(암)"},
-                    new String[]{"EC(dS • m-1)", "1.7", "1.5", "2.6", "2.1", "1.7", "1.7"},
-                    new String[]{"NO3(mmol/L)", "11.5", "10", "19", "15.5", "11.75", "12"},
-                    new String[]{"NH4", "1", "0.5", "1.25", "1.5", "1", "1"},
-                    new String[]{"H2PO4", "1", "1.25", "2", "1.25", "1", "1.25"},
-                    new String[]{"K", "5.5", "5.25", "9", "6.75", "6.5", "5.5"},
-                    new String[]{"Ca", "3.25", "2.75", "5", "3.25", "2.25", "3.25"},
-                    new String[]{"Mg", "1.25", "1.125", "1.5", "2.5", "1.5", "1.25"},
-                    new String[]{"SO4", "1.5", "1.125", "1.125", "1.5", "1.125", "1.125"},
-                    new String[]{"Fe(µmol/L)", "20", "20", "40", "15", "15", "10"},
-                    new String[]{"Cu", "0.75", "0.75", "0.75", "0.75", "0.75", "0.5"},
-                    new String[]{"B", "25", "20", "30", "30", "20", "20"},
-                    new String[]{"Mn", "10", "10", "5", "10", "10", "10"},
-                    new String[]{"Zn", "7", "4", "4", "5", "5", "4"},
-                    new String[]{"Mo", "0.5", "0.5", "0.5", "0.5", "0.5", "0.5"}
-            );
-        } else if ("야마자키 배양액".equals(type)) {
-        } else if ("대한민국 배양액".equals(type)) {
+        CSVDataReader csvDataReader = new CSVDataReader();
+        NutrientSolution nutrientSolution = csvDataReader.readFile(type);
+        ArrayList<CropNutrientStandard> cropList = nutrientSolution.getCropList();
+
+        // 헤더 추가
+        String[] header = new String[17];
+        header[0] = "비료염";
+        header[1] = "EC(dS • m-1)";
+        header[2] = "NO3(mmol/L)";
+        header[3] = "NH4";
+        header[4] = "H2PO4";
+        header[5] = "K";
+        header[6] = "Ca";
+        header[7] = "Mg";
+        header[8] = "SO4";
+        header[9] = "Fe(µmol/L)";
+        header[10] = "Cu";
+        header[11] = "B";
+        header[12] = "Mn";
+        header[13] = "Zn";
+        header[14] = "Mo";
+        compositionData.add(header);
+
+        // 각 작물에 대한 데이터 추가
+        for (CropNutrientStandard crop : cropList) {
+            String[] rowData = new String[17];
+            rowData[0] = crop.getCropName();
+            rowData[1] = String.valueOf(crop.getEC());
+            rowData[2] = String.valueOf(crop.getNO3());
+            rowData[3] = String.valueOf(crop.getNH4());
+            rowData[4] = String.valueOf(crop.getH2PO4());
+            rowData[5] = String.valueOf(crop.getK());
+            rowData[6] = String.valueOf(crop.getCa());
+            rowData[7] = String.valueOf(crop.getMg());
+            rowData[8] = String.valueOf(crop.getSO4());
+            rowData[9] = String.valueOf(crop.getFe());
+            rowData[10] = String.valueOf(crop.getCu());
+            rowData[11] = String.valueOf(crop.getB());
+            rowData[12] = String.valueOf(crop.getMn());
+            rowData[13] = String.valueOf(crop.getZn());
+            rowData[14] = String.valueOf(crop.getMo());
+            compositionData.add(rowData);
         }
 
         return compositionData;

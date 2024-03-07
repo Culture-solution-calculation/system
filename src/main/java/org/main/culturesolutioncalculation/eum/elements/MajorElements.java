@@ -1,5 +1,6 @@
 package org.main.culturesolutioncalculation.eum.elements;
 
+// 다량원소 계산
 public enum MajorElements {
     CalciumNitrateTetrahydrate("질산칼슘 4수염","Ca(NO₃)₂•4H₂O",236,2,0,0,0,1,0,0),
     CalciumNitrateDecahydrate("질산칼슘 10수염","5[Ca(NO₃)₂•2H₂O]NH₄NO₃",1080,2.2,0.2,0,0,1,0,0),

@@ -184,7 +184,7 @@ public class MicroTabController {
         tabPane.getSelectionModel().select(currentIndex - 1);  // 이전 탭으로 이동
     }
 
-    public void saveInput(ActionEvent event) {
+    public void nextButton(ActionEvent event) {
         switchScene(event);
         // 테이블 저장
     }

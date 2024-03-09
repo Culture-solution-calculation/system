@@ -37,7 +37,7 @@
                 </HBox>
             </VBox>
 
-            <Button text="다음" onAction="#saveUserInfo" />
+            <Button text="다음" onAction="#nextButton" />
         </VBox>
     </content>
 </Tab>

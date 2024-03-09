@@ -20,7 +20,7 @@
 
             <HBox alignment="CENTER" spacing="10">
                 <Button text="이전" onAction="#prevButton" />
-                <Button text="다음" onAction="#saveInput" />
+                <Button text="다음" onAction="#nextButton" />
             </HBox>
         </VBox>
     </content>

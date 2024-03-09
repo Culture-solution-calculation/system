@@ -33,7 +33,7 @@ public class UserInfoTabController {
     }
 
     @FXML
-    private void saveUserInfo() {
+    private void nextButton() {
         if(userInfo != null) {
             userInfo.setCustomerName(username.getText().toString());
             userInfo.setAddress(address.getText().toString());
@@ -47,5 +47,7 @@ public class UserInfoTabController {
         TabPane tabPane = userInfoTab.getTabPane();
         int currentIndex = tabPane.getTabs().indexOf(userInfoTab);
         tabPane.getSelectionModel().select(currentIndex + 1);
+
+        // userInfo 값 db에 저장
     }
 }

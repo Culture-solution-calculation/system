@@ -1,9 +1,7 @@
 package org.main.culturesolutioncalculation;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.stage.Modality;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,8 +28,6 @@ public class SettingTabController {
     private RadioButton group7_1, group7_2;
     @FXML
     private RadioButton group8_1, group8_2;
-    @FXML
-    private RadioButton group9_1, group9_2;
 
     private ToggleGroup group1 = new ToggleGroup();
     private ToggleGroup group2 = new ToggleGroup();
@@ -41,13 +37,6 @@ public class SettingTabController {
     private ToggleGroup group6 = new ToggleGroup();
     private ToggleGroup group7 = new ToggleGroup();
     private ToggleGroup group8 = new ToggleGroup();
-    private ToggleGroup group9 = new ToggleGroup();
-
-    // 각 그룹의 이름을 저장
-    private Map<RadioButton, String> groupNamesMap = new HashMap<>();
-
-    // 각 그룹의 설정 정보를 저장
-    private Map<String, SettingInfo> groupInfoMap = new HashMap<>();
 
     @FXML
     private void initialize() {
@@ -76,9 +65,6 @@ public class SettingTabController {
 
         group8_1.setToggleGroup(group8);
         group8_2.setToggleGroup(group8);
-
-        group9_1.setToggleGroup(group9);
-        group9_2.setToggleGroup(group9);
     }
 
     private Map<String, Integer> getSelectedValues() {
@@ -92,17 +78,9 @@ public class SettingTabController {
         selectedValues.put("몰리브뎀 비료", getSelectedValue(group5));
         selectedValues.put("설정 다량원소 단위", getSelectedValue(group6));
         selectedValues.put("설정 미량원소 단위", getSelectedValue(group7));
-        selectedValues.put("원수 입력 단위", getSelectedValue(group9));
-
-        String elementalYnText = getSelectedStringValue(group8);
-        selectedValues.put("원수 고려 유무", "고려합니다".equals(elementalYnText) ? 1 : 0);
+        selectedValues.put("원수 입력 단위", getSelectedValue(group8));
 
         return selectedValues;
-    }
-
-    private String getSelectedStringValue(ToggleGroup group) {
-        RadioButton selectedRadioButton = (RadioButton) group.getSelectedToggle();
-        return selectedRadioButton != null ? selectedRadioButton.getText() : null;
     }
 
     private Integer getSelectedValue(ToggleGroup group) {

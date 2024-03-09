@@ -133,6 +133,7 @@ public class MacroTabController {
         tableView.setEditable(true);
         tableView.setItems(data);
 
+        // 원수 성분, 처방농도 계산..
     }
 
     private String[] getStandardValues(String culture, String crop) {
@@ -186,7 +187,7 @@ public class MacroTabController {
         tabPane.getSelectionModel().select(currentIndex - 1);  // 이전 탭으로 이동
     }
 
-    public void saveInput(ActionEvent event) throws IOException {
+    public void nextButton(ActionEvent event) throws IOException {
         switchScene(event);
         // 테이블 저장
     }

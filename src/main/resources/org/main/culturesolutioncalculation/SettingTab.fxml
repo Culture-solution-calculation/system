@@ -135,26 +135,14 @@
                     </top>
                     <center>
                         <HBox spacing="5">
-                            <!-- 원수 고려 유무 -->
-                            <VBox alignment="CENTER" spacing="5">
-                                <Label text="원수 고려 유무" />
-                                <BorderPane styleClass="borderpane" minHeight="100">
-                                    <center>
-                                        <VBox spacing="5">
-                                            <RadioButton text="고려합니다." fx:id="group8_1" />
-                                            <RadioButton text="고려하지 않습니다." fx:id="group8_2"  />
-                                        </VBox>
-                                    </center>
-                                </BorderPane>
-                            </VBox>
                             <!-- 원수 입력 단위 -->
                             <VBox alignment="CENTER" spacing="5">
                                 <Label text="원수 입력 단위" />
                                 <BorderPane styleClass="borderpane" minHeight="100">
                                     <center>
                                         <VBox spacing="5">
-                                            <RadioButton text="ppm(피피엠)" fx:id="group9_1" />
-                                            <RadioButton text="mM(밀리몰), µM(마이크로몰)" fx:id="group9_2"  />
+                                            <RadioButton text="ppm(피피엠)" fx:id="group8_1" />
+                                            <RadioButton text="mM(밀리몰), µM(마이크로몰)" fx:id="group8_2"  />
                                         </VBox>
                                     </center>
                                 </BorderPane>

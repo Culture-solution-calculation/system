@@ -45,13 +45,11 @@ public class TypeTabController {
     public void prevButton() {
         TabPane tabPane = typeTab.getTabPane();
         int currentIndex = tabPane.getTabs().indexOf(typeTab);
-        if (currentIndex > 0) {  // 첫 번째 탭이 아닌 경우에만
-            tabPane.getSelectionModel().select(currentIndex - 1);  // 이전 탭으로 이동
-        }
+        tabPane.getSelectionModel().select(currentIndex - 1);  // 이전 탭으로 이동
     }
 
     @FXML
-    public void saveType() {
+    public void nextButton() {
         TabPane tabPane = typeTab.getTabPane();
         int currentIndex = tabPane.getTabs().indexOf(typeTab);
 

@@ -37,17 +37,17 @@ public class MacroTabController {
 
     private ObservableList<ObservableList<String>> data = FXCollections.observableArrayList();
 
+    private ObservableList<String> waterData = FXCollections.observableArrayList("0", "0", "0", "0", "0", "0", "0", "0", "0", "0");
     public void initialize() {
         initTableView();
     }
 
     public void initTableView() {
-        // tableView 초기화
-        String[] columnTitles = {"다량원소", "NO3", "NH4", "H2PO4", "K", "Ca", "Mg", "SO4"};
-        String[] rowTitles = {"기준량", "원수성분", "처방농도"};
-
-        String[] values = new String[7];
         data.clear();
+
+        // tableView 초기화
+        String[] columnTitles = {"다량원소", "NO3", "NH4", "H2PO4", "K", "Ca", "Mg", "SO4", "HCO3", "전기전도도(EC)", "pH"};
+        String[] rowTitles = {"기준량", "원수성분", "처방농도"};
 
         for (int i = 0; i < columnTitles.length; i++) {
             final int columnIndex = i;
@@ -69,9 +69,9 @@ public class MacroTabController {
         for (int i = 0; i < rowTitles.length; i++) {
             ObservableList<String> row = FXCollections.observableArrayList();
             row.add(rowTitles[i]);
-            if (i == 0) { // 두 번째 행에 값 추가
-                for (String value : values) {
-                    row.add(value);
+            if (i == 1) {
+                for (String water : waterData) {
+                    row.add(water);
                 }
             } else {
                 for (int j = 1; j < columnTitles.length; j++) {
@@ -84,18 +84,24 @@ public class MacroTabController {
         tableView.setEditable(true);
         tableView.setItems(data);
 
-        System.out.println(data);
+        tableView.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 1) {
+                tableView.edit(tableView.getSelectionModel().getSelectedIndex(), tableView.getFocusModel().getFocusedCell().getTableColumn());
+            }
+        });
     }
 
     @FXML
     public void refreshButton(ActionEvent actionEvent) {
+        data.clear();
+
         // tableView 초기화
-        String[] columnTitles = {"다량원소", "NO3", "NH4", "H2PO4", "K", "Ca", "Mg", "SO4"};
+        String[] columnTitles = {"다량원소", "NO3", "NH4", "H2PO4", "K", "Ca", "Mg", "SO4", "HCO3", "전기전도도(EC)", "pH"};
         String[] rowTitles = {"기준량", "원수성분", "처방농도"};
 
         tableView = new TableView<>();
-        data.clear();
 
+        // 기준량
         String[] values = getStandardValues(userInfo.getSelectedCulture(), userInfo.getSelectedCrop());
 
         for (int i = 0; i < columnTitles.length; i++) {
@@ -118,9 +124,20 @@ public class MacroTabController {
         for (int i = 0; i < rowTitles.length; i++) {
             ObservableList<String> row = FXCollections.observableArrayList();
             row.add(rowTitles[i]);
-            if (i == 0) { // 두 번째 행에 값 추가
+            if (i == 0) { // 기준량 행에 값 추가
                 for (String value : values) {
                     row.add(value);
+                }
+            } else if (i == 1) { // 원수성분 행에 값 추가
+                for (String water : waterData) {
+                    row.add(water);
+                }
+            } else if (i == 2) {
+                for (int k = 1; k < columnTitles.length; k++) {
+                    double standardValue = Double.parseDouble(values[k - 1]);
+                    double waterValue = Double.parseDouble(waterData.get(k - 1));
+                    double prescription = standardValue - waterValue;
+                    row.add(String.valueOf(prescription));
                 }
             } else {
                 for (int j = 1; j < columnTitles.length; j++) {
@@ -133,11 +150,10 @@ public class MacroTabController {
         tableView.setEditable(true);
         tableView.setItems(data);
 
-        // 원수 성분, 처방농도 계산..
     }
 
     private String[] getStandardValues(String culture, String crop) {
-        String[] values = new String[7];
+        String[] values = new String[10];
 
         // 선택한 배양액 이름에 해당하는 NutrientSolution 객체 가져오기
         CSVDataReader csvDataReader = new CSVDataReader();
@@ -150,8 +166,7 @@ public class MacroTabController {
         CropNutrientStandard selectedCropNutrient = findCropNutrient(cropList, crop);
 
         if (selectedCropNutrient == null) {
-            // 선택한 작물에 해당하는 정보가 없는 경우 처리
-            System.out.println("Selected crop information not found.");
+            System.out.println("재배작물 선택 안 되어 있음");
             return values;
         }
 
@@ -163,6 +178,10 @@ public class MacroTabController {
         values[4] = String.valueOf(selectedCropNutrient.getCa());
         values[5] = String.valueOf(selectedCropNutrient.getMg());
         values[6] = String.valueOf(selectedCropNutrient.getSO4());
+        // HCO3, EC, pH
+        values[7] = "0";
+        values[8] = "0";
+        values[9] = "0";
 
         return values;
     }
@@ -181,6 +200,14 @@ public class MacroTabController {
     }
 
     @FXML
+    public void saveData(ActionEvent actionEvent) {
+        ObservableList<String> originalData = tableView.getItems().get(1);
+        waterData = FXCollections.observableArrayList(originalData.subList(1, originalData.size()));
+        // 테이블 저장 -> 자동계산
+    }
+
+
+    @FXML
     public void prevButton(ActionEvent actionEvent) {
         TabPane tabPane = macroTab.getTabPane();
         int currentIndex = tabPane.getTabs().indexOf(macroTab);
@@ -189,7 +216,6 @@ public class MacroTabController {
 
     public void nextButton(ActionEvent event) throws IOException {
         switchScene(event);
-        // 테이블 저장
     }
 
     private void switchScene(ActionEvent event) {

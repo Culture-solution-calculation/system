@@ -18,6 +18,8 @@
             <Button text="새로고침" onAction="#refreshButton" />
             <TableView fx:id="tableView" maxHeight="200"/>
 
+            <Button text="저장" onAction="#saveData" />
+
             <HBox alignment="CENTER" spacing="10">
                 <Button text="이전" onAction="#prevButton" />
                 <Button text="다음" onAction="#nextButton" />

@@ -36,8 +36,8 @@ public class MacroTabController {
     private TableView<ObservableList<String>> tableView;
 
     private ObservableList<ObservableList<String>> data = FXCollections.observableArrayList();
-
     private ObservableList<String> waterData = FXCollections.observableArrayList("0", "0", "0", "0", "0", "0", "0", "0", "0", "0");
+
     public void initialize() {
         initTableView();
     }
@@ -46,7 +46,7 @@ public class MacroTabController {
         data.clear();
 
         // tableView 초기화
-        String[] columnTitles = {"다량원소", "NO3", "NH4", "H2PO4", "K", "Ca", "Mg", "SO4", "HCO3", "전기전도도(EC)", "pH"};
+        String[] columnTitles = {"다량원소", "NO3", "NH4", "H2PO4", "K", "Ca", "Mg", "SO4", "HCO3", "EC", "pH"};
         String[] rowTitles = {"기준량", "원수성분", "처방농도"};
 
         for (int i = 0; i < columnTitles.length; i++) {
@@ -89,6 +89,8 @@ public class MacroTabController {
                 tableView.edit(tableView.getSelectionModel().getSelectedIndex(), tableView.getFocusModel().getFocusedCell().getTableColumn());
             }
         });
+
+        tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     }
 
     @FXML
@@ -96,7 +98,7 @@ public class MacroTabController {
         data.clear();
 
         // tableView 초기화
-        String[] columnTitles = {"다량원소", "NO3", "NH4", "H2PO4", "K", "Ca", "Mg", "SO4", "HCO3", "전기전도도(EC)", "pH"};
+        String[] columnTitles = {"다량원소", "NO3", "NH4", "H2PO4", "K", "Ca", "Mg", "SO4", "HCO3", "EC", "pH"};
         String[] rowTitles = {"기준량", "원수성분", "처방농도"};
 
         tableView = new TableView<>();
@@ -150,6 +152,13 @@ public class MacroTabController {
         tableView.setEditable(true);
         tableView.setItems(data);
 
+        tableView.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 1) {
+                tableView.edit(tableView.getSelectionModel().getSelectedIndex(), tableView.getFocusModel().getFocusedCell().getTableColumn());
+            }
+        });
+
+        tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     }
 
     private String[] getStandardValues(String culture, String crop) {
@@ -205,7 +214,6 @@ public class MacroTabController {
         waterData = FXCollections.observableArrayList(originalData.subList(1, originalData.size()));
         // 테이블 저장 -> 자동계산
     }
-
 
     @FXML
     public void prevButton(ActionEvent actionEvent) {

@@ -35,6 +35,7 @@ public class MicroTabController {
     private TableView<ObservableList<String>> tableView;
 
     private ObservableList<ObservableList<String>> data = FXCollections.observableArrayList();
+    private ObservableList<String> waterData = FXCollections.observableArrayList("0", "0", "0", "0", "0", "0", "0", "0");
 
     @FXML
     private void initialize() {
@@ -42,13 +43,11 @@ public class MicroTabController {
     }
 
     public void initTableView() {
-        // tableView 초기화
-        String[] columnTitles = {"미량원소", "Fe", "Cu", "B", "Mn", "Zn", "Mo"};
-        String[] rowTitles =  {"기준량", "원수성분", "처방농도"};
-
-        // 기준량 행에 들어갈 값
-        String[] values = new String[6];
         data.clear();
+
+        // tableView 초기화
+        String[] columnTitles = {"미량원소", "Fe", "Cu", "B", "Mn", "Zn", "Mo", "Cl", "Na"};
+        String[] rowTitles =  {"기준량", "원수성분", "처방농도"};
 
         for (int i = 0; i < columnTitles.length; i++) {
             final int columnIndex = i;
@@ -70,9 +69,9 @@ public class MicroTabController {
         for (int i = 0; i < rowTitles.length; i++) {
             ObservableList<String> row = FXCollections.observableArrayList();
             row.add(rowTitles[i]);
-            if (i == 0) { // 두 번째 행에 값 추가
-                for (String value : values) {
-                    row.add(value);
+            if (i == 1) {
+                for (String water : waterData) {
+                    row.add(water);
                 }
             } else {
                 for (int j = 1; j < columnTitles.length; j++) {
@@ -84,12 +83,20 @@ public class MicroTabController {
 
         tableView.setEditable(true);
         tableView.setItems(data);
+
+        tableView.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 1) {
+                tableView.edit(tableView.getSelectionModel().getSelectedIndex(), tableView.getFocusModel().getFocusedCell().getTableColumn());
+            }
+        });
+
+        tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     }
 
     @FXML
     public void refreshButton() {
         // tableView 초기화
-        String[] columnTitles = {"미량원소", "Fe", "Cu", "B", "Mn", "Zn", "Mo"};
+        String[] columnTitles = {"미량원소", "Fe", "Cu", "B", "Mn", "Zn", "Mo", "Cl", "Na"};
         String[] rowTitles =  {"기준량", "원수성분", "처방농도"};
 
         tableView = new TableView<>();
@@ -117,9 +124,20 @@ public class MicroTabController {
         for (int i = 0; i < rowTitles.length; i++) {
             ObservableList<String> row = FXCollections.observableArrayList();
             row.add(rowTitles[i]);
-            if (i == 0) { // 두 번째 행에 값 추가
+            if (i == 0) { // 기준량 행에 값 추가
                 for (String value : values) {
                     row.add(value);
+                }
+            } else if (i == 1) { // 원수성분 행에 값 추가
+                for (String water : waterData) {
+                    row.add(water);
+                }
+            } else if (i == 2) {
+                for (int k = 1; k < columnTitles.length; k++) {
+                    double standardValue = Double.parseDouble(values[k - 1]);
+                    double waterValue = Double.parseDouble(waterData.get(k - 1));
+                    double prescription = standardValue - waterValue;
+                    row.add(String.valueOf(prescription));
                 }
             } else {
                 for (int j = 1; j < columnTitles.length; j++) {
@@ -132,10 +150,17 @@ public class MicroTabController {
         tableView.setEditable(true);
         tableView.setItems(data);
 
+        tableView.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 1) {
+                tableView.edit(tableView.getSelectionModel().getSelectedIndex(), tableView.getFocusModel().getFocusedCell().getTableColumn());
+            }
+        });
+
+        tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     }
 
     private String[] getStandardValues(String culture, String crop) {
-        String[] values = new String[7];
+        String[] values = new String[8];
 
         // 선택한 배양액 이름에 해당하는 NutrientSolution 객체 가져오기
         CSVDataReader csvDataReader = new CSVDataReader();
@@ -160,6 +185,9 @@ public class MicroTabController {
         values[3] = String.valueOf(selectedCropNutrient.getMn());
         values[4] = String.valueOf(selectedCropNutrient.getZn());
         values[5] = String.valueOf(selectedCropNutrient.getMo());
+        // Cl, Na
+        values[6] = "0";
+        values[7] = "0";
 
         return values;
     }
@@ -178,6 +206,13 @@ public class MicroTabController {
     }
 
     @FXML
+    public void saveData(ActionEvent actionEvent) {
+        ObservableList<String> originalData = tableView.getItems().get(1);
+        waterData = FXCollections.observableArrayList(originalData.subList(1, originalData.size()));
+        // 테이블 저장 -> 자동계산
+    }
+
+    @FXML
     public void prevButton(ActionEvent actionEvent) {
         TabPane tabPane = microTab.getTabPane();
         int currentIndex = tabPane.getTabs().indexOf(microTab);
@@ -186,7 +221,6 @@ public class MicroTabController {
 
     public void nextButton(ActionEvent event) {
         switchScene(event);
-        // 테이블 저장
     }
 
     private void switchScene(ActionEvent event) {

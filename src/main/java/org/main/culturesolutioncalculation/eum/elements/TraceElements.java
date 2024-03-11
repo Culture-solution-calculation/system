@@ -1,7 +1,6 @@
 package org.main.culturesolutioncalculation.eum.elements;
 
-// 미량원소 계산
-public enum TraceElements {
+public enum TraceElements{
     Fe_EDTA("킬레이트철","Fe-EDTA(13%)",430,55.85, 1),
     Fe_DTPA("킬레이트철","Fe-DTPA(6%)",932,55.85, 1),
     Fe_EDDHA("킬레이트철","Fe-EDDHA(5%)",1118,55.85, 1),
@@ -16,6 +15,7 @@ public enum TraceElements {
 
     private final String name;
     private final String symbol;
+    private final String type = "trace";
     private final double molecularWeight;
     private final double atomicWeight;
 

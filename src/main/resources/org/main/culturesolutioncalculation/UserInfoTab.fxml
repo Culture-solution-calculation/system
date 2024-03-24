@@ -54,6 +54,11 @@
                 </HBox>
             </VBox>
 
+            <HBox alignment="CENTER" spacing="10">
+                <Button text="회원가입" onAction="#signin" />
+                <Button text="로그인" onAction="#login" />
+            </HBox>
+
             <Button text="다음" onAction="#nextButton" />
         </VBox>
     </content>

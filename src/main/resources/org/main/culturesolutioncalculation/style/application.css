@@ -53,7 +53,7 @@ body {
 
 /* 전체 TabPane에 대한 스타일 */
 .tab-pane {
-    -fx-tab-min-width: 130px;
+    -fx-tab-min-width: 110px;
     -fx-tab-min-height: 20px;
 }
 

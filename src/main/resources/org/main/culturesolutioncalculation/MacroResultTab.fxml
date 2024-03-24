@@ -5,20 +5,16 @@
 <?import java.net.URL?>
 <Tab xmlns="http://javafx.com/javafx"
      xmlns:fx="http://javafx.com/fxml"
-     fx:controller="org.main.culturesolutioncalculation.MicroTabController"
-     fx:id="microTab"
-     text="미량원소(처방농도)">
+     fx:controller="org.main.culturesolutioncalculation.MacroResultTabController"
+     fx:id="macroResultTab"
+     text="다량원소(계산결과)">
     <content>
         <VBox alignment="CENTER" spacing="10">
             <stylesheets>
                 <URL value="@style/application.css" />
             </stylesheets>
 
-            <Label text="원수값, 처방농도 입력" />
-            <Button text="새로고침" onAction="#refreshButton" />
-            <TableView fx:id="tableView" maxHeight="200"/>
-
-            <Button text="저장" onAction="#saveData" />
+            <TableView fx:id="tableView" minHeight="500" />
 
             <HBox alignment="CENTER" spacing="10">
                 <Button text="이전" onAction="#prevButton" />

@@ -219,36 +219,11 @@ public class MicroTabController {
         tabPane.getSelectionModel().select(currentIndex - 1);  // 이전 탭으로 이동
     }
 
+    @FXML
     public void nextButton(ActionEvent event) {
-        switchScene(event);
-    }
-
-    private void switchScene(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("MicroResult.fxml"));
-            Parent root = loader.load();
-
-            TabPane tabPane = findTabPane(event);
-            // 현재 선택된 탭을 새로운 내용으로 대체
-            Tab selectedTab = tabPane.getSelectionModel().getSelectedItem();
-            selectedTab.setContent(root);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private TabPane findTabPane(ActionEvent event) {
-        Node source = (Node) event.getSource();
-        Scene scene = source.getScene();
-        if (scene != null) {
-            VBox root = (VBox) scene.getRoot(); // Main.fxml의 root인 VBox를 찾음
-            for (Node node : root.getChildren()) {
-                if (node instanceof TabPane) {
-                    return (TabPane) node;
-                }
-            }
-        }
-        return null;
+        TabPane tabPane = microTab.getTabPane();
+        int currentIndex = tabPane.getTabs().indexOf(microTab);
+        tabPane.getSelectionModel().select(currentIndex + 1);
     }
 
 }

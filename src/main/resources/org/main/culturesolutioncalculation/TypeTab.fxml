@@ -44,7 +44,7 @@
                             </VBox>
                         </HBox>
 
-                        <TableView fx:id="tableView" minHeight="400"/>
+                        <TableView fx:id="tableView" minWidth="700" minHeight="400"/>
                     </VBox>
                 </AnchorPane>
             </SplitPane>

@@ -15,7 +15,12 @@
                 <URL value="@style/application.css" />
             </stylesheets>
             <VBox spacing="5">
-                <HBox spacing="10">
+                <VBox spacing="5">
+                    <Label text="회원가입: 이름, 주소 입력" />
+                    <Label text="로그인: 회원가입 후 발급받은 아이디 및 기타 정보 입력" />
+                </VBox>
+
+                <HBox spacing="5">
                     <Label text="성명: " />
                     <TextField fx:id="username" promptText="입력" />
                 </HBox>
@@ -23,6 +28,7 @@
                     <Label text="주소: " />
                     <TextField fx:id="address" promptText="입력" />
                 </HBox>
+
                 <HBox spacing="5">
                     <Label text="연락처: " />
                     <TextField fx:id="contact" promptText="입력" />
@@ -34,6 +40,17 @@
                 <HBox spacing="5">
                     <Label text="재배규모: " />
                     <TextField fx:id="scale" promptText="입력" />
+                </HBox>
+                <HBox spacing="5">
+                    <Label text="재배작물(육종): " />
+                    <TextField fx:id="cropInput" promptText="입력" />
+                </HBox>
+                <HBox spacing="5">
+                    <Label text="배지종류: " />
+                    <TextField fx:id="cultureInput" promptText="입력" />
+                </HBox>
+                <HBox spacing="5">
+                    <Label text="분석이력: " />
                 </HBox>
             </VBox>
 

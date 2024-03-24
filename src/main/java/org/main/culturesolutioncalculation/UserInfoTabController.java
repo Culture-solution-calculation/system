@@ -11,19 +11,20 @@ public class UserInfoTabController {
 
     @FXML
     private TextField username;
-
     @FXML
     private TextField address;
 
     @FXML
     private TextField contact;
-
-
     @FXML
     private DatePicker date;
-
     @FXML
     private TextField scale;
+    @FXML
+    private TextField cropInput;
+    @FXML
+    private TextField cultureInput;
+
 
     private UserInfo userInfo = MainController.getUserInfo();
 
@@ -34,16 +35,14 @@ public class UserInfoTabController {
 
     @FXML
     private void nextButton() {
-        if(userInfo != null) {
-            userInfo.setCustomerName(username.getText().toString());
-            userInfo.setAddress(address.getText().toString());
-            userInfo.setContact(contact.getText().toString());
-            userInfo.setProcessingDate(date.getValue());
-            userInfo.setScale(scale.getText().toString());
+        userInfo.setCustomerName(username.getText().toString());
+        userInfo.setAddress(address.getText().toString());
+        userInfo.setContact(contact.getText().toString());
+        userInfo.setProcessingDate(date.getValue());
+        userInfo.setScale(scale.getText().toString());
+        userInfo.setScale(cropInput.getText().toString());
+        userInfo.setScale(cultureInput.getText().toString());
 
-        } else {
-            System.err.println("UserInfo 객체가 초기화되지 않았습니다.");
-        }
         TabPane tabPane = userInfoTab.getTabPane();
         int currentIndex = tabPane.getTabs().indexOf(userInfoTab);
         tabPane.getSelectionModel().select(currentIndex + 1);
